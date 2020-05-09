@@ -1,0 +1,482 @@
+/**/
+/*		Colores Utilizados en el diseño:	*/
+/*		#2988BC								*/
+/*		#2F496E								*/
+/*		#F4EADE								*/
+/*		#ED8C72								*/
+/**/
+/* ----------------------------CONTENIDO------------------------------ */
+/**/
+/**/
+/**/
+/* ---------------- Título ----------------- */
+/**/
+.alert div{
+	margin: 0px;
+}
+.session{
+	background-color: #F4EADE;
+	padding: 10px;
+	margin:0px;
+	color: #2F496E;
+}
+.session a{
+	background-color: #2988BC;
+	color: white;
+	padding: 5px;
+	border-radius: 10px;
+}
+.session a:hover {
+color:#100;
+}
+.header{
+right: 10px;
+margin: 20px;
+position: fixed;
+}
+.header img{
+	width: 60px;
+	margin-top: -30px;
+}
+.titulo{
+	width: 100%;
+	height: auto;
+	background-color: #F4EADE;
+	padding: 20px;
+	font: small-caps 100%/200% serif;
+	position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.prof{
+	font-size: 30px;
+	color: #2988BC;
+}
+.nombre{
+	margin-top: 10px;
+	font-size: 22px;
+	color: #2F496E;
+}
+/**/
+/* ---------------- Resumen ---------------- */
+/**/
+.resumen{
+	width: 100%;
+	height: 500px;
+}
+.slider {
+	width: 100%;
+	height: 500px;
+	overflow: hidden;
+	position: relative;
+}
+.slider ul {
+	display: flex;
+	padding: 0;
+	width: 400%;
+	animation: cambio 20s infinite alternate linear;
+}
+.slider li {
+	width: 100%;
+	list-style: none;
+}
+.slider img {
+	width: 100%;
+}
+@keyframes cambio {
+	0% {margin-left: 0;}
+	20% {margin-left: 0;}
+	
+	25% {margin-left: -100%;}
+	45% {margin-left: -100%;}
+	
+	50% {margin-left: -200%;}
+	70% {margin-left: -200%;}
+	
+	75% {margin-left: -300%;}
+	100% {margin-left: -300%;}
+}
+.marco_resumen {
+	width: 60%;
+	margin-right: auto;
+	margin-left: 20%;
+left:auto;
+right:auto;
+	height: auto;
+	display: flex;
+	justify-content: center;
+        position: absolute;
+        margin-top:-450px;
+
+}
+.imagen_per > img{
+	width: 300px;
+	border: 5px solid white;
+        margin: 0px 50px 20px 20px;
+}
+div .resumen_texto{
+	color: #ffffff;
+	background-color: #2F496E;
+	opacity:0.8;
+	padding: 20px 30px 10px 30px;
+	font-family: "Times New Roman", Georgia, Serif;
+	border-left: 5px solid #2988BC;
+	border-right: 5px solid #2988BC;
+max-height: 430px;
+}
+.resumen_texto p{
+	font-size: 19px;
+	margin-top: 20px;
+	color: #ffffff;
+        overflow:auto;
+max-height: 290px;
+}
+/**/
+/* ------------ Datos Personales ----------- */
+/**/
+.datos{
+	width: auto;
+	height: auto;
+}
+.datos ul{
+  list-style-type: none;
+  margin:0;
+  padding-left:5%;
+  overflow: hidden;
+  background-color: #F4EADE;
+}
+.datos li{
+  float: left;
+  display: block;
+  color: #2F496E;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: "Times New Roman", Georgia, Serif;
+}
+.datos li img{
+	filter: opacity(.5) drop-shadow(0 0 0 #F4EADE);
+}
+/**/
+/* ---------- Formación Académica ---------- */
+/**/
+.form_aca{
+	width: 100%;
+	height: 520px;
+	background-color: white;
+	text-align: center;
+}
+.form_aca > h1{
+	font: small-caps 100%/200% serif;
+	font-size: 25px;
+	color: #2988BC;
+	padding:20px;
+}
+.tarjetas{
+	display: flex;
+	justify-content: center;
+}
+.tarjeta{
+	/*border: 5px solid #ED8C72;*/
+	background-color: #F4EADE;
+	width: 300px;
+	height: 400px;
+	padding: 20px;
+	margin: 0px 20px 20px 20px;
+	text-align: center;
+	border-radius: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.7);
+	font-size: 14px;
+	/*color: #ffffff;*/
+}
+.tarjeta:hover{
+	transform: translateY(-15px);
+	box-shadow: 0px 12px 16px rgba(0,0,0,0.5);
+}
+.tarjeta p{
+	margin-top: 30px;
+}
+.tarjeta_icon{
+	background-color: white;
+	margin: -20px;
+	padding: 20px;
+	border-radius: 15px 15px 0px 0px;
+}
+.tarjeta a{
+	background-color: #2988BC;
+	color: white;
+	padding: 15px;
+	border-radius: 5px;
+}
+.tarjeta a:hover{
+	background-color: white;
+	border: 5px solid #2988BC;
+	color: #2988BC;
+	padding: 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	text-decoration: none;
+}
+.tarjeta img{
+	margin-bottom: 20px;
+	filter: opacity(0.5) drop-shadow(0px 0px 0px #F4EADE);
+}
+/**/
+/* ------- Formación Extra_académica ------- */
+/**/
+.form_exaca{
+	width: 100%;
+	height: 520px;
+	background-color: #F4EADE;
+	text-align: center;
+}
+.form_exaca > h1{
+	font: small-caps 100%/200% serif;
+	font-size: 25px;
+	color: #2988BC;
+	padding:20px;
+}
+.tarjetas_fe{
+	display: flex;
+	justify-content: center;
+}
+.carousel{
+	width: 300px;
+	height: 400px;
+	background-color: #2988BC;
+	padding: 30px;
+	margin: 0px 20px 20px 20px;
+	text-align: center;
+	border-radius: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.7);
+	font-size: 80%;
+}
+.carousel-item h3{
+	background-color:white;
+	padding-top: 65%;
+	padding-bottom: 65%;
+	border-radius: 15px;
+	color: #2F496E;
+}
+.tarjeta_fe{
+	width: 270px;
+	height: 345px;
+	color: white;
+	background-color: #2F496E;
+	border-radius: 15px;
+	padding: 20px;
+	border: 5px solid #2988BC;
+}
+.tarjeta_fe p{
+	margin-top: 30px;
+}
+.tarjetafe_icon{
+	background-image: url('../open-iconic/check.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: -20px;
+	padding: 20px;
+	border-radius: 10px 10px 0px 0px;
+	height: 100px;
+}
+.tarjeta_fe a{
+	background-color: #F4EADE;
+	color: #2F496E;
+	padding: 15px;
+	border-radius: 5px;
+}
+.tarjeta_fe a:hover{
+	background-color: #2F496E;
+	border: 5px solid #F4EADE;
+	color: #F4EADE;
+	padding: 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	text-decoration: none;
+}
+/**/
+/* -------- Experiencia Profesional -------- */
+/**/
+.exp_prof{
+	width: 100%;
+	height: auto;
+	background-color: white;
+}
+.titulo_ep h1{
+	font: small-caps 100%/200% serif;
+	font-size: 35px;
+	color: #2988BC;
+	background-color:white;
+	padding-top: 20%;
+	padding-bottom: 20%;
+	border-radius: 15px;
+	color: #2F496E;
+	text-align: center;
+}
+.tarjetas_ep{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+.tarjeta_ep{
+	width: 1000px;
+	height: 500px;
+	background-color: #ED8C72;
+	padding: 30px;
+	border-radius: 0px;
+	text-align: left;
+}
+.tarjetaep_icon{
+	background-image: url('../open-iconic/work.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 10px 0px 0px 10px;
+	height: 440px;
+	width: 340px;
+	float: left;
+}
+.tarjetaep_p{
+	padding: 30px;
+	overflow: auto;
+	background-color: #F4EADE;
+	height: 440px;
+	border-radius: 0px 10px 10px 0px;
+	color: #2F496E;
+	font-family: Bookman, URW Bookman L, serif;
+	font-stretch: ultra-condensed;
+}
+.tarjetaep_p h4{
+	text-decoration: none;
+}
+/* ------- Idiomas y conocimientos informáticos ------- */
+.comp_ing{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	margin-bottom: 30px;
+	border: solid 5px #F4EADE;
+}
+.comp_ing h1{
+	font: small-caps 100%/200% serif;
+	font-size: 25px;
+	color: #2988BC;
+	padding:20px;
+	background-color: #F4EADE;
+}
+.columnas{
+	padding-top: 20px;
+	padding-left: 100px;
+	padding-right: 100px;
+	padding-bottom: 20px;
+	column-count: 2; /* número de columnas */
+	column-gap: 100px; /* ancho de columnas */
+	column-rule: 5px outset #F4EADE; /* separación de columnas */
+}
+.metrica{
+	background-color: #F4EADE;
+	margin: 10px;
+}
+.metrica_total{
+	background-color: #2988BC;
+	color:#F4EADE;
+}
+/*           -Sección Otros Datos y objetivo profesional-           */
+.oo{
+	height: auto;
+	overflow: hidden;
+}
+/*           -Otros Datos-           */
+.otros{
+	width: 35%;
+	height: auto;
+	background-color: #ED8C72;
+	float: left;
+	margin: 20px;
+	border-radius: 15px;
+}
+.otros h1{
+	font: small-caps 100%/200% serif;
+	font-size: 25px;
+	color: #2F496E;
+	padding:20px;
+	text-align: center;
+}
+.otros ul{
+	list-style-image: url("../open-iconic/png/pin-2x.png");
+	font-family: times, serif; 
+	font-size:16pt;
+}
+/*           -Objetivo Profesional-           */
+.objetivo{
+	width: 60%;
+	height: auto;
+	float: left;
+	margin: 20px;
+}
+.objetivo h1{
+	font: small-caps 100%/200% serif;
+	font-size: 25px;
+	color: #2988BC;
+	padding:20px;
+}
+.header_op{
+	border-radius: 15px 15px 0px 0px;
+	border: solid 3px #2F496E;
+	text-align: center;
+}
+.body_op{
+	border-radius: 0px 0px 15px 15px;
+	text-align: center;
+	background: #2F496E;
+	color: #ffffff;
+	padding: 20px; 
+	font-family: times, serif; font-size:16pt; font-style:italic;
+}
+/* ------------------ Email ---------------- */
+.email{
+	margin-bottom: 100px;
+	text-align: center;
+}
+.email h1{
+	font: small-caps 100%/200% serif;
+	font-size: 30px;
+	color: #2988BC;
+	padding:10px;
+}
+.form_email{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+	background-color: #F4EADE;
+	font-family: times, serif; font-size:16pt;
+	color: #2F496E;
+}
+.b_email{
+	margin: 10px;
+	background-color: #2988BC;
+	appearance:inherit;
+	color: #ffffff;
+	border-radius: 10px;
+	border: none;
+	padding: 5px;
+}
+/* ------------------ Footer ---------------- */
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: center;
+  background-color: #ED8C72;
+  /*background-color:	#F4EADE;      */                                                         
+  padding: 25px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="{{ asset('img/cv.png') }}" />
+	<title> Curriculum Vitae - @yield('titulo') </title>
+
+</head>
+<body>
+@if(count($errors) > 0)
+	<div class="errors alert alert-danger alert-dismissible">
+		<h5>Valide lo siguiente:</h5>
+		<ul>
+		@foreach($errors->all() as $error)
+			<li>{{ $error }}</li>
+		@endforeach
+		</ul>
+	</div>
+@endif
+	@include('messages.message-correct')
+	@include('messages.message-error')
+	<div class="header" id="up">
+		<img class="cv" src="{{ asset('img/cv.png') }}">
+	</div>
+
+		@yield('contenido')
+
+</body>
+
+<div class="footer">
+			Desarrolla tu <a href="/">Curriculum Vitae</a> | Contacto: <a href="mailto:maribelmarroquin@cvitae.x10.mx">maribelmarroquin@cvitae.x10.mx</a>
+</div>
+</html>
