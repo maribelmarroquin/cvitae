@@ -42,7 +42,7 @@
 	</tr>
 	<tr>
 		<th>Imagen de Actual del Documento:</th>
-		<td><img class="id_img" src="{{asset("storage/docs/$feae->ruta_docex")}}"></td>
+		<td><img class="id_img" src="{{asset("storage/$name_user/docs/$feae->ruta_docex")}}"></td>
 	</tr>
 	<tr>
 		<td></td>

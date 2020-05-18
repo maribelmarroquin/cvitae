@@ -2,10 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use DB;
+use Carbon\Carbon;
 use Auth;
+
+use Illuminate\Database\Eloquent\Model;
 
 class Otros extends Model
 {
@@ -18,6 +19,10 @@ class Otros extends Model
      */
     protected $fillable = ['dato', 'des_dato', 'ruta_dato', 'principal', 'fk_user_o'];
 
+    public function users() {
+		return $this->belongs_to('User');
+	}
+
     public function setRutaDatoAttribute($ruta_dato){
         $nameUser = Auth::user('users')->name;
         if (!empty($ruta_dato)) {
@@ -29,6 +34,6 @@ class Otros extends Model
     }
 
     public function getUrlPathAttribute(){
-        return \Storage::url($this->ruta);
+        return \Storage::url($this->ruta_dato);
     }
 }

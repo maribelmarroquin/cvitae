@@ -24,7 +24,7 @@
 		@if ($fe->ruta_docex === null)
 		<td style="color:red;">Sin imagen registrada</td>
 		@else
-		<td><img class="id_img" src="{{asset("storage/docs/$fe->ruta_docex")}}"></td>
+		<td><img class="id_img" src="{{asset("storage/$name_user/docs/$fe->ruta_docex")}}"></td>
 		@endif
 		
 		<td>{{ $fe->principal }}</td>

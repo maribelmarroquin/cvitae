@@ -29,7 +29,7 @@
 	</tr>
 	<tr>
 		<th>Imagen de Actual:</th>
-		<td><img class="id_img" src="{{ asset('id/'.$oe->ruta_dato)}}"></td>
+		<td><img class="id_img" src="{{asset("storage/$name_user/docs/$oe->ruta_dato")}}"></td>
 	</tr>
 	<tr>
 		<td></td>

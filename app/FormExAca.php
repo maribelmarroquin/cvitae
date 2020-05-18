@@ -3,6 +3,7 @@
 namespace App;
 use DB;
 use Carbon\Carbon;
+use Auth;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,3 +35,4 @@ class FormExAca extends Model
         return \Storage::url($this->ruta_docex);
     }
 }
+ 

@@ -67,6 +67,8 @@ class OtrosController extends Controller
      */
     public function show($id)
     {
+        $name_user = Auth::user()->name;
+
         $otros= \DB::table('otros')
             ->select('*')
             ->where(['id_otros' => $id, 'fk_user_o' => Auth::user()->id])
@@ -75,7 +77,7 @@ class OtrosController extends Controller
             Session::flash('message-error', 'Sin Acceso');
             return redirect::to('principal');
         }
-            return view('contCV.edit_otrosDat')->with(['otrosE'=>$otros]);
+            return view('contCV.edit_otrosDat')->with(['otrosE'=>$otros, 'name_user'=>$name_user]);
     }
 
     /**
