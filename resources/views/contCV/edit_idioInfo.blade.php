@@ -29,10 +29,17 @@
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<th>{!!Form::label('clasificacion', '*Clasificación:')!!}</th>
-						<td>{!!Form::text('clasificacion', null, array('class'=>'form-control border-secondary', 'required', 'maxlength'=>'10'))!!}</td>
-					</tr>
+					<th>{!!Form::label('clasificacion', '*Clasificación:')!!}</th>
+					<td>
+
+						<select name="clasificacion" class="custom-select form-control border-secondary" id="inputGroupSelect04">
+							<option selected>{{$ii->clasificacion}}</option>
+							@foreach ($clas_ii as $ci)
+							<option value="{{$ci->id_clas_conocimientos}}">{{$ci->clasificacion}}</option>
+							@endforeach
+						</select>
+			
+					</td>
 					<tr>
 						<th>{!!Form::label('principal', '¿Mostrar en PDF?')!!}</th>
 						<td>{!!Form::checkbox('principal', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
