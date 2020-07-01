@@ -44,6 +44,15 @@ class InicioController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'usuario' => 'required|max:255',
+            'email' => 'email|required|max:255',
+            'psw' => 'required|max:16|min:8',
+            'pswtwo' => 'required|same:psw'
+        ];
+
+        $this->validate($request, $rules);
+
         $email_ex = array();
         $name_ex = array();
 
@@ -76,13 +85,23 @@ class InicioController extends Controller
 
                     Session::flash('message-error', 'Las contraseñas no coinciden. Favor de intentarlo nuevamente.');
                 } else {
-
+                    /**
+                     * Registro de usuario
+                     */
                     \App\User::create([
                         'name' => $request['usuario'],
                         'email' => $request['email'],
                         'password' => bcrypt($request['pswtwo']),
                     ]);
-
+                    
+                    /**
+                     * Registro de Diseños de Obsequio
+                     */
+                    $this->regDisenos($request['email']);
+                    
+                    /**
+                     * Creación de directorios
+                     */
                     $directory_user = $request->usuario;
                     $directory_id = "$request->usuario/id";
                     $directory_docs = "$request->usuario/docs";
@@ -99,39 +118,46 @@ class InicioController extends Controller
 
     }
 
-    
-
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Registro de Diseños de Obsequio
      */
-    public function edit($id)
-    {
-        //
-    }
+    private function regDisenos($email){
+        
+        $id_user = \DB::table('users')
+            ->select('id')
+            ->where('email', '=', $email)
+            ->get();
+        
+        foreach ($id_user as $id) {
+            $id_u = $id->id;
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        \App\UserDesignsPDF::create([
+            'fk_design_pdf' => '1',
+            'fk_user_pdf' => $id_u,
+            'vigencia_ini_pdf' => \Carbon\Carbon::now(),
+            'vigencia_fin_pdf' => \Carbon\Carbon::now()->addYears(10),
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        \App\UserDesignsPDF::create([
+            'fk_design_pdf' => '2',
+            'fk_user_pdf' => $id_u,
+            'vigencia_ini_pdf' => \Carbon\Carbon::now(),
+            'vigencia_fin_pdf' => \Carbon\Carbon::now()->addYears(10),
+        ]);
+
+        \App\UserDesignsView::create([
+            'design_view' => '1',
+            'fk_user_design_view' => $id_u, 
+            'vigencia_ini_view' => \Carbon\Carbon::now(),
+            'vigencia_fin_view' => \Carbon\Carbon::now()->addYears(10),
+        ]);
+
+        \App\UserDesignsView::create([
+            'design_view' => '2',
+            'fk_user_design_view' => $id_u,
+            'vigencia_ini_view' => \Carbon\Carbon::now(),
+            'vigencia_fin_view' => \Carbon\Carbon::now()->addYears(10),
+        ]);
     }
 }

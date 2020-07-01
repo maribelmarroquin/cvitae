@@ -17,7 +17,7 @@ class Otros extends Model
      *
      * @var array
      */
-    protected $fillable = ['dato', 'des_dato', 'ruta_dato', 'principal', 'fk_user_o'];
+    protected $fillable = ['dato', 'des_dato', 'ruta_dato', 'principal', 'principal_vista', 'fk_user_o'];
 
     public function users() {
 		return $this->belongs_to('User');

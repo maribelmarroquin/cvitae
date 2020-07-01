@@ -1,0 +1,409 @@
+@import url(EleganceViewInitial.css);
+
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 1 --------------------------------------------- */
+@media screen and (max-width: 1200px) {
+    .session{
+        font-size: 12pt;
+    }
+    .session_small{
+        display: none;
+    }
+    .session br{
+        display: inline;
+    }
+    .session_button_small{
+        top: 85px;
+    }
+    
+    /* ----------------------------------------------------------*/
+    .titulo{
+        width: 100%;
+        margin-top: -30x;
+    }
+
+    .cv{
+        width: 80px;
+        float: none;  
+        margin: 10px 20px 20px 20px;
+        position: relative;
+        right: 10px;
+    }
+    .prof{
+        padding: 10px 10px 0px 10px;
+        font-size: 16pt;
+        text-align: center;
+        background-color: #6D7993;
+        color: #96858f;
+        text-shadow: 1px 1px 1px #ffffff;
+    }
+    .nombre{
+        padding: 0px 10px 10px 10px;
+        font-size: 18pt;
+        text-align: center;
+        background-color: #6D7993;
+        text-shadow: 1px 1px 1px #96858f;
+        letter-spacing: 2px;
+        color: #ffffff;
+    }
+    .prof_small{
+        font-size: 12pt;
+    }
+    .nombre_small{
+        font-size: 14pt;
+        letter-spacing: 0px;
+    }
+
+    .cv_small{
+        display: none;
+    }
+
+    .cv_turn{
+        display: none;
+    }
+    
+    /**--------------------------------------*/
+    .resumen{
+        padding: 180px 60px 0px 60px;
+    }
+    /* --------------------------------------*/
+    .datos{
+        padding-top: 0px;
+    }
+    .datos > ul{
+        position: relative;
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+    }
+    .datos_img{
+        display:block;
+        margin:auto;
+        /*padding-top: 25px;
+        padding-right: 25px;*/
+    }
+    .datos_img>img{
+        display:block;
+        margin:auto;
+    }
+    .datos_txt{
+        margin: 10px auto 30px auto;
+        width: 100%;
+    }
+
+    /**-----------------------------------------*/
+    .tarjetas{
+        grid-template-columns: 33% 33% 33%;
+    }
+
+    /**-----------------------------------------*/
+    .tarjetas_fe{
+        grid-template-columns: 33% 33% 33%;
+    }
+    /**-----------------------------------------*/
+    .contenido_ep{
+       height: 500px;
+    }
+    .tarjetaep_icon{
+        margin: 25px 20px 25px 10px;
+        border-radius: 10px;
+
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 2--------------------------------------------- */
+@media screen and (max-width: 1000px) {
+    .contenido_ep{
+        height: 550px;
+    }
+    .tarjetaep_p > h1{
+        padding-top: 25%;
+        font-size: 40pt;
+    }
+    .tarjetaep_icon{
+        margin: 70px 20px 70px 10px;
+        width: 300px;
+        height: 410px;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 2--------------------------------------------- */
+@media screen and (max-width: 850px) {
+    /**-----------------------------------------*/
+    .datos > ul{
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 25% 25% 25% 25%;
+    }
+    /**-----------------------------------------*/
+    .tarjetas{
+        grid-template-columns: 50% 50%;
+    }
+    /**-----------------------------------------*/
+    .tarjetas_fe{
+        grid-template-columns: 50% 50%;
+    }
+    /* -----------------------------------------*/
+    .contenido_ep{
+        height: 600px;
+    }
+    .tarjetaep_p{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px 10px 10px 10px;
+        padding: 160px 10px 10px 10px;
+    }
+    .tarjetaep_p > h1{
+        width: 100%;
+        height: 100%;
+    } 
+    .tarjetaep_icon{
+        margin: -10px 0px -10px 0px;
+        right: 0px;
+        width: 100%;
+        height: 160px;
+        float: none;
+        border-radius: 10px 10px 0px 0px;
+        position: absolute;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 2--------------------------------------------- */
+@media screen and (max-width: 800px) {
+    .contenido_ep{
+        height: 650px;
+    }
+    .tarjetaep_p > h1{
+        padding-top: 15%;
+        font-size: 40pt;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 3--------------------------------------------- */
+@media screen and (max-width: 721px) {
+    /* -----------------------------------------------*/
+    .resumen{
+        padding: 200px 20px 50px 20px;
+    }
+    .resumen_texto > p{
+        text-align: justify;
+    }
+    .mc{
+        display: inline;
+        align-items: unset;
+        background: #96858f;
+        -webkit-box-shadow: inset 2px 2px 5px 0px rgba(255,255,255,1);
+        -moz-box-shadow: inset 2px 2px 5px 0px rgba(255,255,255,1);
+        box-shadow: inset 2px 2px 5px 0px rgba(255,255,255,1);
+        border-radius: 20px;
+    }
+    .imagen_per{
+        text-align: center;
+        padding-top: 30px;
+    }
+    /*----------------------------------------------*/
+    .datos > ul{
+        grid-template-columns: 100%;
+        grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
+        padding: 10px;
+    }
+    .datos > ul > li{
+        justify-items: center;
+        align-items: center;
+        padding: 10px;
+    }
+    .datos_img{
+        width: 60px;
+        height: 60px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-left: 2px;
+        float: left;
+        margin-right: 20px;
+    }
+    .datos_img>img{
+        margin-top: -10px;
+        width: 30px;
+        height: auto;
+    }
+    .datos_txt{
+        text-align: left;
+    }
+     /**-----------------------------------------*/
+     .tarjetas{
+        grid-template-columns: 100%;
+    }
+    /*-------------------------------------------------*/
+    .columnas{
+        width: 75%;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 4--------------------------------------------- */
+@media screen and (max-width: 620px) {
+    /**-----------------------------------------*/
+    .tarjetas_fe{
+        grid-template-columns: 100%;
+    }
+
+    /*------------------------------------------*/
+    .contenido_ep{
+        height: 700px;
+    }
+    .tarjetaep_p{
+        padding-top: 100px;
+    }
+    .tarjetaep_icon{
+        width: 100%;
+        height: 100px;
+    }
+    /*-----------------------------------------------*/
+    .otros{
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    .objetivo{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 4--------------------------------------------- */
+@media screen and (max-width: 510px) {
+    .ir-arriba {
+        bottom:110px;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 4--------------------------------------------- */
+@media screen and (max-width: 500px) {
+    .resumen_texto > h1{
+        font-size: 26pt;
+    }
+    .form_aca > h1{
+        font-size: 26pt;
+    }
+    .form_exaca h1{
+        font-size: 26pt;
+    }
+    /* ----------------*/
+    .exp_prof{
+        margin: 0px 0px 100px 0px;
+    }
+    .tarjetaep_p > h1{
+        padding-top: 40%;
+        font-size: 36pt;
+    }
+    /*-------------------------------------------------*/
+    .columnas{
+        width: 85%;
+    }
+}
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 5--------------------------------------------- */
+@media screen and (max-width: 447px) {
+    .nombre_small{
+        display: none;
+        transition-duration: 2s, 2s;
+    }
+    .prof_small{
+        display: none;
+        transition-duration: 2s, 2s;
+    }
+    .resumen{
+        padding-top: 240px;
+    }
+    .resumen_texto > h1{
+        font-size: 20pt;
+    }
+    .form_aca > h1{
+        font-size: 20pt;
+    }
+    .form_exaca h1{
+        font-size: 20pt;
+    }
+    /*------------------------------------------*/
+    .exp_prof{
+        margin: 0px 0px 100px 0px;
+    }
+    .contenido_ep{
+        height: 750px;
+    }
+    .tarjetaep_p > h1{
+        padding-top: 35%;
+        font-size: 30pt;
+    }
+    /*---------------------------------*/
+    .comp_ing>h1{
+        font-size: 20pt;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 6--------------------------------------------- */
+@media screen and (max-width: 390px) {
+    /* -----------------------------------------------*/
+    .resumen{
+        padding: 250px 10px 50px 10px;
+    }
+    .resumen_texto > p{
+        text-align: justify;
+    }
+    .session_button_small{
+        top: 115px;
+    }
+    /*------------------------------------------*/
+    .exp_prof{
+        margin: 0px 0px 100px 0px;
+    }
+    .contenido_ep{
+        height: 850px;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 7--------------------------------------------- */
+@media screen and (max-width: 345px) {
+    .session_button_small{
+        top: 138px;
+    }
+     /* -----------------------------------------------*/
+     .resumen{
+        padding: 250px 5px 50px 5px;
+    }
+}
+
+
+/* --------------------------------------------------------------------------------------- */
+/* ------------------------ Responsive Design 7--------------------------------------------- */
+@media screen and (max-height: 600px) {
+    .session_button_small{
+        top:10px
+    }
+    .nombre_small{
+        display: none;
+        transition-duration: 2s, 2s;
+    }
+    .prof_small{
+        display: none;
+        transition-duration: 2s, 2s;
+    }
+    .footer{
+        display: none;
+    }
+    .footer_small{
+        display: block;
+        position: relative;
+        width: 100%;
+        color: black;
+        text-align: center;
+        background-color: #d5d5d5;                                                      
+        padding: 25px;
+        margin-bottom: 0px;
+    }
+    .ir-arriba {
+        bottom:10px;
+    }
+}

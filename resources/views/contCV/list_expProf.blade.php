@@ -1,52 +1,54 @@
-<h3>DATOS REGISTRADOS</h3>
-@foreach ($expProf as $ep)
+<h3>Datos Registrados de Experiencia Profesional:</h3>
+
 <div class="table-responsive-md">
-<table class="table">	
-	<tr>
-		<th class="table-dark" style="width: 20%;">Cargo:</th>
-		<td>{{ $ep->cargo }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Empresa:</th>
-		<td>{{ $ep->empresa }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Funciones:</th>
-		<td>{{ $ep->funciones }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Jefe:</th>
-		<td>{{ $ep->jefe }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Teléfono:</th>
-		<td>{{ $ep->telefono }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Fecha de inicio de labores:</th>
-		<td>{{ $ep->inicio_lab }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Fecha de finalización de labores:</th>
-		<td>{{ $ep->fin_lab }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Motivos de finalización:</th>
-		<td>{{ $ep->motivos }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Logros:</th>
-		<td>{{ $ep->logros }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Mostrar en PDF:</th>
-		<td>{{ $ep->principal }}</td>
-	</tr>
-	<tr>
-		<th class="table-dark">Acciones:</th>
-		<td><a class="btn btn-primary" href="javascript:window.open('expProf/{{$ep->id_exprof}}','Editar Conocimientos informáticos e idiomas.','width=628,height=550,left=50,top=50,toolbar=yes');void 0">Editar</a>{!!Form::open(['route'=> ['expProf.destroy',$ep->id_exprof],'method'=>'DELETE'])!!}{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}{!!Form::close()!!}
-		</td>
-	</tr>
-</table>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Orden:</th>
+				<th class="table-dark">Cargo:</th>
+				<th class="table-dark">Empresa:</th>
+				<th class="table-dark">Fecha de inicio de labores:</th>
+				<th class="table-dark">Fecha de finalización de labores:</th>
+				<th class="table-dark">Mostrar en PDF:</th>
+				<th class="table-dark">Mostrar en consulta web:</th>
+				<th class="table-dark">Acciones:</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach ($expProf as $ep)
+			<tr>
+				<td>
+					{{ $ep->order_ep}} <br>
+				<a href="expProf/subir/{{$ep->id_exprof}}" title="Subir"><img src="{{asset("/open-iconic/png/arrow-circle-top-2x.png")}}"></a>
+					<a href="expProf/bajar/{{$ep->id_exprof}}" title="Bajar"><img src="{{asset("/open-iconic/png/arrow-circle-bottom-2x.png")}}"></a>
+				</td>
+				<td>{{ $ep->cargo }}
+					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ver_exp_profModal{{$ep->id_exprof}}">
+						Ver completo
+					</button>
+					@include('contCV.ver_expProf')
+				</td>
+				<td>{{ $ep->empresa }}</td>
+				<td>{{ $ep->inicio_lab }}</td>
+				<td>{{ $ep->fin_lab }}</td>
+				<td>{{ $ep->principal }}</td>
+				<td>{{ $ep->principal_vista }}</td>
+				<td>
+			
+					<button type="button" class="btn" style='background:#006699; color:#ffffff;' data-toggle="modal" data-target="#exp_profModal{{$ep->id_exprof}}">
+						Editar
+					</button>
+					@include('contCV.edit_expProf')
+		
+				
+					{!!Form::open(['route'=> ['expProf.destroy',$ep->id_exprof],'method'=>'DELETE'])!!}{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}{!!Form::close()!!}
+		
+				</td>
+			</tr>
+			@endforeach
+			<tr>
+				<td colspan="12">{{ $expProf->appends(['tab'=> 'exp_prof'])->links() }}</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-@endforeach

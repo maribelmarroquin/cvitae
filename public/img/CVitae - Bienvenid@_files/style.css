@@ -1,0 +1,359 @@
+/*----------------------------------------Header-----------------------------------*/
+.header{
+	display: block;
+}
+.cv{
+	width: 150px;
+	height: 150px;
+	margin-right: 20px;
+	margin-top: 5px;
+	float: right;
+}
+
+/*----------------------------------------Menu Tab------------------------------------*/
+
+* {box-sizing: border-box}
+body {
+	font-family: "Lato", sans-serif;
+	padding-bottom: 50px;
+}
+
+/* Style the tab */
+div.tab {
+    float: left;
+    background-color: #069;
+    width: 20%;
+    margin-bottom: 100px;
+}
+
+/* Style the buttons inside the tab */
+
+.tab .menu{
+	display: block;
+  background-color: #036;
+  padding: 22px 16px;
+  width: auto;
+  border: none;
+  outline: none;
+  text-align: left;
+  transition: 0.3s;
+  font-size: 17px;
+  cursor: default;
+  color: #ffffff;
+}
+.article .tab .menu{
+  color: #ffffff;
+}
+div.tab a {
+  display: block;
+  background-color: inherit;
+  color: white;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+/* Change background color of buttons on hover */
+div.tab a:hover {
+    background-color: #036;
+    text-decoration: none;
+}
+
+/* Create an active/current "tab button" class */
+div.tab a.active {
+    background-color: #ccc;
+    color: black;
+    text-decoration: none;
+}
+
+.tab .icon {
+	display: none;
+}
+
+/* -----------------------------------------Tab Content---------------------------------- */
+.tabcontent {
+    float: left;
+    padding: 0px 100px 0px 20px;
+    width: 80%;
+    border-left: none;
+    height: auto;
+    position: relative;
+    margin-bottom: 200px;
+    /*
+    margin-bottom: 100px;
+    padding-bottom: 100px;
+    */
+}
+
+/* ----------------------------------- Paginación --------------------------------- */
+
+
+/* ------------------------------------Responsive Designe---------------------------------*/
+@media screen and (max-width: 900px) {
+
+  .tab {
+      width: 100%;
+      height: auto;
+      position: relative;
+  }
+  div.tab {
+    float: left;
+    background-color: #069;
+    width: 100%;
+    height: auto;
+	}
+  .tab .tablinks:not(:first-child) {
+      float: left;
+      padding: 15px;
+      display: none;
+  }
+  .tabcontent {
+    /*width: 100%;*/
+    height: auto;
+    padding: 0px 00px 0px 20px;
+    width: 90%;
+  }
+  .tab .menu{
+		display: none;
+	}
+
+  .tab .icon {
+    float: right;
+    display: block;
+    position: absolute;
+	}
+
+  .tab.responsive {
+    position: relative;
+  }
+  .tab.responsive .icon {
+    position: relative;
+    right: 0;
+    top: 0;
+  }
+  .tab.responsive .tablinks {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .titulo_cv{
+    margin: 0px;
+    padding: 0px;
+    float: left;
+  }
+
+  .session{
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    float: left;
+    width: 100%;
+    display: block;
+  }
+  .cv{
+    margin-top: -110px;
+    padding: 0px;
+    float: left;
+  }
+  .ir-arriba {
+    margin-bottom:25px;
+    z-index: 1000;
+  }
+}
+
+/*-----------------------------------Footer------------------------------------*/
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: center;
+  background-color: #ccc;
+  padding: 25px;
+  z-index: 1001;
+}
+
+.article{
+	display: block;
+	margin-top: 20px;
+  margin-bottom: 100px;
+  height: auto;
+	/*height: 2000px;*/
+}
+
+/*-------------------------------UP-------------------------*/
+
+.ir-arriba {
+	width: 50px;
+	height: 50px;
+	padding:5px;
+	background:#069;
+	font-size:50px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:80px;
+  right:10px;
+  z-index: 1000;
+}
+
+/* ---------------------message---------------------------- */
+
+button.close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+img.id_img{
+  width: 150px;
+  border-radius:10px 10px 10px 10px;
+}
+
+img.id_img_v{
+  width: 300px;
+  border-radius:10px 10px 10px 10px;
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+margin-bottom: 20px;
+}
+
+table{
+  padding: 10px;
+  margin:10px;
+}
+
+.celda{
+height: auto;
+width: 100px;
+}
+
+.titulo_cv{
+  padding: 20px;
+  margin:20px 20px 20px 0px;
+  color:#ffffff;
+  background: #036;
+  margin-right: 190px;
+  border-radius: 0px 10px 10px 0px;
+  opacity: 0.6;
+}
+
+.session{
+  background-color: #000;
+  padding: 15px;
+  color: white;
+  width: auto;
+}
+.border{
+  background: #006699;
+}
+/*--------------------------------------------------*/
+.instruccion1{
+  background-color: #036;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  text-align: justify;
+  margin: 10px;
+}
+
+.instruccion2{
+  background-color: #069;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  text-align: justify;
+  margin: 10px;
+}
+.crop1{
+ background-image: url("../img/tie.jpg");
+ background-position: center;
+ background-size: 80%;
+
+  /* Set a specific height */
+  min-height: 300px; 
+  margin-left: 20px;
+  margin-right: 20px;
+
+  
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+.crop2{
+ background-image: url("../img/write.jpg");
+
+  /* Set a specific height */
+  min-height: 500px; 
+  margin-left: 20px;
+  margin-right: 20px;
+  
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+ .crop3{
+  background-image: url("../img/question.jpg");
+  background-position: center;
+  background-size: 80%;
+ 
+   /* Set a specific height */
+   min-height: 300px; 
+   margin-left: 20px;
+   margin-right: 20px;
+ 
+   
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+  }
+  .crop4{
+    background-image: url("../img/password.jpg");
+    background-position: center;
+    background-size: 80%;
+   
+     /* Set a specific height */
+     min-height: 300px; 
+     margin-left: 20px;
+     margin-right: 20px;
+   
+     
+     /* Create the parallax scrolling effect */
+     background-attachment: fixed;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+    }
+/*---------------------------------------------VISTA-------------------------------------------*/
+.icon_v{
+  background-color: #134A78;
+  padding: 15px;
+  width: 100px;
+  height: auto;
+  border-radius: 47px;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+}
+.icon_v img{
+  filter: invert(100%);
+}

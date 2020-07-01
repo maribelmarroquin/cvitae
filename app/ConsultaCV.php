@@ -30,7 +30,7 @@ class ConsultaCV extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['user_cons', 'password', 'cont', 'fk_user_consulta'];
+    protected $fillable = ['user_cons', 'empresa', 'password', 'cont', 'fk_user_consulta'];
 
     /**
      * The attributes excluded from the model's JSON form.

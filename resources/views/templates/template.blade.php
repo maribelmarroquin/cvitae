@@ -10,22 +10,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="shortcut icon" href="{{ asset('img/cv.png') }}" />
-	<title> Curriculum Vitae - @yield('titulo') </title>
+	<title> CVitae - @yield('titulo') </title>
 
 </head>
+
 <body>
-@if(count($errors) > 0)
-	<div class="errors alert alert-danger alert-dismissible">
-		<h5>Valide lo siguiente:</h5>
-		<ul>
-		@foreach($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
-		</ul>
-	</div>
-@endif
+
 	@include('messages.message-correct')
-	@include('messages.message-error')
+    @include('messages.message-error')
+
 	<div class="header" id="up">
 		<img class="cv" src="{{ asset('img/cv.png') }}">
 	</div>
@@ -35,6 +28,6 @@
 </body>
 
 <div class="footer">
-			Desarrolla tu <a href="/">Curriculum Vitae</a> | Contacto: <a href="mailto:maribelmarroquin@cvitae.x10.mx">maribelmarroquin@cvitae.x10.mx</a>
+			Desarrolla tu <a href="/">Curriculum Vitae</a> | Contacto: <a href="mailto:cvitae@solinfori.com">cvitae@solinfori.com</a>
 </div>
 </html>

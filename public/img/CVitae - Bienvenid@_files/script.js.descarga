@@ -1,0 +1,9 @@
+function menuResponsive() {
+    var x = document.getElementById("v-pills-tab");
+    if (x.className === "tab nav flex-column nav-pills") {
+        x.className += " responsive";
+    } else {
+        x.className = "tab nav flex-column nav-pills";
+    }
+}
+

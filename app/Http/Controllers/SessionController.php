@@ -27,6 +27,23 @@ class SessionController extends Controller {
 		/*if (Auth::attempt('users', ['email' => $request['email'], 'password' => $request['password']])) {
 			return Redirect::to('principal');
 		}*/
+
+		$rules = [
+            'email' => 'email|required|max:255',
+            'password' => 'required'
+        ];
+         /*
+        $messages = [
+			'email' => 'Ingrese una estructura de correo electrónico válida.',
+            'email.required' => 'Es necesario ingresar la cuenta de correo que registró en ésta plataforma.',
+			'email.max' =>'Has excedido la cantidad de caracteres (255) que soporta el campo "usuario".',
+            'password.required' => 'Es necesario ingresar la contraseña de su cuenta.'
+        ];
+         
+        $this->validate($request, $rules, $messages);
+		*/
+		$this->validate($request, $rules);
+
 		if (Auth::guard('web')->attempt(['email' => $request['email'], 'password' => $request['password']])) {
 			return Redirect::to('principal');
 		}
@@ -37,7 +54,8 @@ class SessionController extends Controller {
 	}
 
 	public function logout() {
-		Auth::logout('web');
+		/*Auth::logout('web');*/
+		Auth::guard('web')->logout();
 		return Redirect::to('/');
 	}
 }

@@ -3,17 +3,21 @@
 @section('titulo', 'Bienvenid@')
 
 @section('contenido')
+<a href="#up" title="Ir arriba"><img class="ir-arriba" src="{{ asset('img/up.png') }}" /></a>
 
-<div class='session'>
-  Usuario logueado: <b>{!! Auth::user('consulta_cv')->user_cons !!}</b>
-  <a href="logoutCons" style="text-decoration: none;">Cerrar Sesión</a>
+<div class='session' id="session">
+  Usuario logueado: <b>{!! Auth::user('consulta_cv')->user_cons !!}</b><br>
+  <a class="logout" href="logoutCons" >Cerrar Sesión</a>
+</div>
+<div class='session_button' id="session_button">
+<a title="Cerrar Sesión" class="logout" href="logoutCons" ><img src="elegance/power-standby_blanco-3x.png" ></a>
 </div>
 
 	@foreach ($datosP as $dp)
 
 	@endforeach
 
-	<div class="titulo">
+	<div class="titulo" id="titulo">
 		@include('vistaUno.titulo')
 	</div>
 <!-- ---------------------------------------------------- -->
@@ -21,11 +25,11 @@
 		@include('vistaUno.resumen')
 	</div>
 <!-- ---------------------------------------------------- -->
-	<div class="datos">
+	<div class="datos" id="datos">
 		@include('vistaUno.datos')
 	</div>
 <!-- ---------------------------------------------------- -->
-	<div class="form_aca">
+	<div class="form_aca" id="form_aca">
 		@include('vistaUno.form_aca')
 	</div>
 <!-- ---------------------------------------------------- -->
@@ -37,7 +41,7 @@
 		@include('vistaUno.exp_prof')
 	</div>
 <!-- ---------------------------------------------------- -->
-	<div class="comp_ing">
+	<div class="comp_ing" id="comp_ing">
 		@include('vistaUno.comp_ing')
 	</div>
 <!-- ---------------------------------------------------- -->
@@ -55,4 +59,7 @@
 		@include('vistaUno.email')
 	</div>
 <!-- ---------------------------------------------------- -->
+	<div class="footer_small">
+		Desarrolla tu <a href="/">Curriculum Vitae</a> | Contacto: <a href="mailto:cvitae@solinfori.com">cvitae@solinfori.com</a>
+	</div>
 @endsection

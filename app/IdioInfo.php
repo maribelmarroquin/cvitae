@@ -13,7 +13,7 @@ class IdioInfo extends Model
      *
      * @var array
      */
-    protected $fillable = ['idi_info', 'nivel', 'clasificacion', 'principal', 'fk_user_ii'];
+    protected $fillable = ['idi_info', 'nivel', 'clasificacion', 'principal', 'principal_vista', 'fk_user_ii'];
 
     public function users() {
 		return $this->belongs_to('User');

@@ -14,19 +14,28 @@
 </div>
 
 <div class="article">
-  <div class="tab" id="myTab">
+
+  <div class="tab nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <a class="menu" >Menú</a>
-    <button class="tablinks" onclick="openTab(event, 'registro')" id="defaultOpen">Registro de nuevo usuario</button>
-    <button class="tablinks" onclick="openTab(event, 'inicio')">Inicio de sesión</button>
-    <button href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="menuResponsive()">&#9776;</button>
+    <a href="javascript:void(0);" class="icon" onclick="menuResponsive()">&#9776;</a>
+    <a class="tablinks  active" id="v-pills-inicio-tab" data-toggle="pill" href="#inicio" role="tab" aria-controls="v-pills-inicio" aria-selected="true">Inicio de sesión</a>
+    <a class="tablinks" id="v-pills-registro-tab" data-toggle="pill" href="#registro" role="tab" aria-controls="v-pills-registro" aria-selected="false">Registro de nuevo usuario</a>
   </div>
 
-  <div id="registro" class="tabcontent" style="height: 800px;">
-    @include('form.registro')
-  </div>
+  <div class="tab-content" id="v-pills-tabContent">
 
-  <div id="inicio" class="tabcontent" style="height: 800px;">
-    @include('form.sesion')
+    <div class="tabcontent tab-pane fade show active" id="inicio" role="tabpanel" aria-labelledby="v-pills-inicio-tab">
+      @include('messages.message-correct')
+      @include('messages.message-error')
+      @include('form.sesion')
+    </div>
+
+    <div class="tabcontent tab-pane fade" id="registro" role="tabpanel" aria-labelledby="v-pills-registro-tab">
+      @include('messages.message-correct')
+      @include('messages.message-error')
+      @include('form.registro')
+    </div>
+
   </div>
 
 </div>

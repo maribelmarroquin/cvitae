@@ -1,6 +1,7 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/pdfUno.css">
+	
+  <link rel="stylesheet" type="text/css" href={{$design}}>
 </head>
 <body>
 <!--------------------------------------If de validación de datos vacíos-------------------------------------------->
@@ -19,7 +20,8 @@
   </header>
 
   @if($dp->ruta ==! "")
-  <img class="img_id" src="id/{{ $dp->ruta }}">
+  <img src="storage/{{$name_user}}/id/{{$dp->ruta}}" class="img_id" />
+  {{--<img class="img_id" src="id/{{ $dp->ruta }}">--}}
   @else
   <h5 class="sin_foto">Ingrese una fotografía en el sistema.</h5>
   @endif
@@ -27,15 +29,22 @@
 <!--------------------------------------datos Personales-------------------------------------------->
 
 <div class="datos">
-	<p class="domicilio">Domicilio: <b>{{ $dp->direccion }}</b></p>
+	<p class="domicilio">Domicilio: <br><b>{{ $dp->direccion }}</b></p>
 	<p class="txt_datos">
-		Edad: <b>{{ $dp->fecha_nac }} años</b> <img src="open-iconic/png/eye.png"> Teléfono/celular: <b>{{ $dp->telefono }}</b><br> E-mail: <b>{{ $dp->email_u }}</b> <img src="open-iconic/png/eye.png"> Sitio web: <b>{{ $dp->sitio }}</b></p>
-		<div class="border_bottom"> </div>
+		<span class="edad"><img src="open-iconic/png/eye.png"> Edad: <br><b>{{ $dp->fecha_nac }} años<br><br></b> </span>
+		<span class="telefono"><img src="open-iconic/png/eye.png"> Teléfono/celular: <br> <b>{{ $dp->telefono }}<br><br></b> </span> 
+		<span class="email"><img src="open-iconic/png/eye.png"> E-mail: <br><b>{{ $dp->email_u }}<br><br></b> </span>
+	 
+@if($dp->sitio ==! "")
+		<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"> Sitio web: <br><b>{{ $dp->sitio }}<br></b></span> 
+@endif
+	</p>
+	<div class="border_bottom"> </div>
 </div>
 
 <!--------------------------------------Resumen-------------------------------------------->
 <div class="resumen">
-	<h4 align="center">EXTRACTO PROFESIONAL</h4>
+	<h4>Extracto Profesional</h4>
 	<p>
 		{{ $r->resumen }}
 	</p>
@@ -51,8 +60,9 @@
 <!--------------------------------------Formación ACADÉMICA-------------------------------------------->
 @if(count($formAca) ==! 0)
 <div class="form_aca">
-	<h4 align="center">FORMACIÓN ACADÉMICA</h4>
-	@foreach (array_reverse($formAca) as $fa)
+	<h4>Formación Académica</h4>
+	@foreach ($formAca as $fa)
+	<div class="form">
 		<div class="form_dur">{{ $fa->ano_ini }} - {{ $fa->ano_fin }}</div>
 		<div class="fa">
 			{{ $fa->nivel }}<br>
@@ -62,7 +72,8 @@
 			{{ $fa->instituto }}<br>
 			<div class="doc_form">{{ $fa->doc }}</div>
 		</div>
-		@endforeach
+	</div>
+	@endforeach
 </div>
 
 @else
@@ -72,51 +83,37 @@
 <!--------------------------------------Experiencia Profesional-------------------------------------------->
 @if(count($expProf) ==! 0)
 <div class="exp_prof">
-	<h4 align="center">EXPERIENCIA LABORAL</h4>
-	@foreach (array_reverse($expProf) as $ep)
+	<h4>Experiencia Laboral</h4>
+	@foreach ($expProf as $ep)
+	<div class="experiencia">
 		<div class="ep">
-			<div class="duracion">{{ $ep->inicio_lab }} - {{ $ep->fin_lab }}</div>
-		<div class="empresa">Puesto de <strong>{{ $ep->cargo }}</strong> en <b>{{ $ep->empresa }}</b></div>
-			 <span class="fun">{{ $ep->funciones }}</span><br>
+			
+			<div class="duracion"><span class="icon_empleo"></span>{{ $ep->inicio_lab }} - {{ $ep->fin_lab }}</div>
+			<div class="empresa"><span class="auxiliar">Puesto de </span><strong>{{ $ep->cargo }}</strong> <span class="auxiliar">en </span><br><i>{{ $ep->empresa }}</i></div>
+		</div>
+		<div class="funciones">
+			<span class="fun"><span class="label_funciones">Funciones: </span>{{ $ep->funciones }}</span><br>
 			<div class="logros"><strong>Logros:</strong> <span class="fun">{{ $ep->logros }}</span></div>
 		</div>
-		@endforeach
+	</div>
+	@endforeach
 </div>
 @else
 	<h5 class="exp_prof">Falta por registrar su experiencia profesional.</h5>
 @endif
 </div>
-<!--------------------------------------Formación EXRA-ACADÉMICA-------------------------------------------->
-<div class="grid2">
-@if(count($formExAca) ==! 0)
-<div class="form_exaca">
-	<h4>FORMACIÓN EXTRA-ACADÉMICA</h4>
-	@foreach (array_reverse($formExAca) as $fea)
-		<div class="fe">
-			<p>{{ $fea->curso }}:</p>
-			<div class="fe_des"><strong>{{ $fea->desc }}</strong></div>
-			<p>{{ $fea->instituto }}<br>
-			<b>{{ $fea->duración }}</b><br>
-			{{ $fea->doc_ex }}</p>
-		</div>
-		<div class="fe_div"> </div>
-		@endforeach
-</div>
-@else
-	
-@endif
 
-<div class="idio_otro">
+<div class="grid2">
 <!--------------------------------------Conocimientos-------------------------------------------->
 
 @if(count($idioInfo) ==! 0)
 <div class="idio_info">
-	<h4>CONOCIMIENTOS</h4>
+	<h4>Conocimientos</h4>
 	@foreach ($idioInfo as $ii)
 		<div class="ii">
 			{{ $ii->idi_info }}:<br>
-			<div style="background_color: #90AFC5; border-radius: 7px;">
-				<div style="padding:2px 2px 2px 10px; border-radius: 7px; background_color:#336B87; color: #ffffff; width:{{ $ii->nivel }};">{{ $ii->nivel }}</div>
+			<div class="ii_bar">
+				<div class="ii_percent" style="width:{{ $ii->nivel }};">{{ $ii->nivel }}</div>
 			</div>
 		</div>
 		@endforeach
@@ -124,12 +121,33 @@
 @else
 	
 @endif
+
+<div class="form_otro">
+	<!--------------------------------------Formación EXRA-ACADÉMICA-------------------------------------------->
+	@if(count($formExAca) ==! 0)
+	<div class="form_exaca">
+		<h4>Formación Extra-académica</h4>
+		@foreach ($formExAca as $fea)
+			<div class="fe">
+				<p>{{ $fea->curso }}:</p>
+				<div class="fe_des"><b>{{ $fea->desc }}</b></div>
+				<p>{{ $fea->instituto }}<br>
+				<b>{{ $fea->duración }}</b><br>
+				{{ $fea->doc_ex }}</p>
+			</div>
+			<div class="fe_div"> </div>
+			@endforeach
+	</div>
+	@else
+		
+	@endif
+
 <!--------------------------------------Otros datos-------------------------------------------->
 @if(count($otros) ==! 0)
 <div class="otros">
-	<h4>DATOS ADICIONALES</h4>
+	<h4>Datos Adicionales</h4>
 	<ul class="lis_o">
-		@foreach (array_reverse($otros) as $o)
+		@foreach ($otros as $o)
 		<li><div class="o">
 			{{ $o->dato }}: <strong>{{ $o->des_dato }}</strong>
 			</div>
@@ -142,6 +160,23 @@
 @endif
 
 </div>
+
+<!--------------------------------------Objetivo Profesional-------------------------------------------->
+@if(count($objProf) ==! 0)
+<div class="obj_prof">
+	<h4>Objetivo Profesional</h4>
+	<div class="txt_obj_prof">
+		@foreach($objProf as $op)
+		@if ($op->objetivo ==! null)
+		<div class="objetivo">{{$op->objetivo}}</div>
+		@endif
+		<div class="des_obj">{{$op->des_obj}}</div>
+		@endforeach
+	</div>
+</div>
+@else
+	
+@endif
 
 </div>
 <!--------------------------------------footer-------------------------------------------->

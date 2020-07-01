@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Http\Requests;
+/*use App\Http\Requests;*/
 use App\Http\Controllers\Controller;
 use Auth;
 use Session;
@@ -22,10 +22,13 @@ class PDFUnoController extends Controller
         $this->middleware('auth:web');
     }
 
-    public function index(){
+    public function pdf(Request $request){
 
         $id_user = Auth::user('users')->id;
+        $name_user = Auth::user('users')->name;
 
+        $design =  'css/pdf/'.$request['design'].'.css';    
+                
         $resumen = \DB::table('resumens')
             ->select('*')
             ->where('fk_user_re', '=', $id_user )
@@ -41,6 +44,7 @@ class PDFUnoController extends Controller
             ->select('*')
             ->where('fk_user_fa', '=', $id_user )
             ->where('principal', '=', 'OK' )
+            ->orderByRaw('order_fa asc')
             ->get();
 
         $formExAca= \DB::table('form_ex_acas')
@@ -59,6 +63,7 @@ class PDFUnoController extends Controller
             ->select('*')
             ->where('fk_user_ep', '=', $id_user )
             ->where('principal', '=', 'OK' )
+            ->orderByRaw('order_ep asc')
             ->get();
 
         $otros=\DB::table('otros')
@@ -66,8 +71,14 @@ class PDFUnoController extends Controller
             ->where('fk_user_o', '=', $id_user )
             ->where('principal', '=', 'OK' )
             ->get();
+        
+        $objProf=\DB::table('obj_profs')
+            ->select('*')
+            ->where('fk_user_op', '=', $id_user )
+            ->where('principal', '=', 'OK' )
+            ->get();
 
-        $pdf = PDF::loadView('contCV.pdfUnosp', ['resumen' => $resumen, 'datosP'=>$datosP, 'formAca'=>$formAca, 'formExAca'=>$formExAca, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros]);
+        $pdf = PDF::loadView('contCV.pdfUnosp', ['resumen' => $resumen, 'datosP'=>$datosP, 'formAca'=>$formAca, 'formExAca'=>$formExAca, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros, 'objProf'=>$objProf, 'design'=>$design,  'name_user'=>$name_user]);
         return $pdf->stream('cv.pdf');
 
     }
@@ -77,7 +88,7 @@ class PDFUnoController extends Controller
     } 
 
     public function store (Request $request){
-        
+        $name_user = Auth::user('users')->name;
         $pass = $request['pass'];
 
         if(empty($pass)){
@@ -101,15 +112,17 @@ class PDFUnoController extends Controller
         }
      
 
-        \CV\ConsultaCV::create([
+        \App\ConsultaCV::create([
             'fk_user_consulta' => $id_user,
             'user_cons' => $userConsulta,
+            'empresa' => $request['empresa'],
             'cont' => '0',
             'password' => bcrypt($pass),
         ]);
 
-       
 
+        $design =  'css/pdf/'.$request->design.'.css';
+       
         $resumen = \DB::table('resumens')
             ->select('*')
             ->where('fk_user_re', '=', $id_user )
@@ -125,6 +138,7 @@ class PDFUnoController extends Controller
             ->select('*')
             ->where('fk_user_fa', '=', $id_user )
             ->where('principal', '=', 'OK' )
+            ->orderByRaw('order_fa asc')
             ->get();
 
         $formExAca= \DB::table('form_ex_acas')
@@ -143,6 +157,7 @@ class PDFUnoController extends Controller
             ->select('*')
             ->where('fk_user_ep', '=', $id_user )
             ->where('principal', '=', 'OK' )
+            ->orderByRaw('order_ep asc')
             ->get();
 
         $otros=\DB::table('otros')
@@ -158,7 +173,7 @@ class PDFUnoController extends Controller
             ->get();
 
         
-        $pdf = PDF::loadView('contCV.pdfUnoPass', ['resumen' => $resumen, 'datosP'=>$datosP, 'passConsulta'=>$pass, 'userConsulta'=>$userConsulta,'formAca'=>$formAca, 'formExAca'=>$formExAca, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros, 'objProf'=>$objProf]);
+        $pdf = PDF::loadView('contCV.pdfUnoPass', ['resumen' => $resumen, 'datosP'=>$datosP, 'passConsulta'=>$pass, 'userConsulta'=>$userConsulta,'formAca'=>$formAca, 'formExAca'=>$formExAca, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros, 'objProf'=>$objProf, 'design'=>$design,'name_user'=>$name_user]);
 
         return $pdf->stream('cv.pdf');
 

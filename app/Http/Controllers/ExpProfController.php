@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Http\Requests\ExpProfRequest;
 use App\Http\Controllers\Controller;
 use Session;
 use Auth;
@@ -17,35 +15,29 @@ class ExpProfController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExpProfRequest $request)
     {
+        $tabName = 'exp_prof';
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
+
+        $expProf_order= \DB::table('exp_profs')
+            ->select('order_ep')
+            ->where('fk_user_ep', '=', $id )
+            ->orderByRaw('order_ep desc')
+            ->limit(1)
+            ->get();
+        
+        foreach ($expProf_order as $ep_o) {
+            $last_order = $ep_o->order_ep;
+        }
+
+        $last_order = $last_order+1;
 
         \App\ExpProf::create([
             'empresa' => $request['empresa'],
@@ -55,46 +47,17 @@ class ExpProfController extends Controller
             'telefono' => $request['telefono'],
             'inicio_lab' => $request['inicio_lab'],
             'fin_lab' => $request['fin_lab'],
+            'status_fin'=> $request['status_fin'],
             'motivos' => $request['motivos'],
             'logros' => $request['logros'],
             'principal' => ($principal === 'yes') ? "OK":"-",
+            'principal_vista' => ($request['principal_vista'] === 'yes') ? "OK":"-",
             'fk_user_ep' => $id,
+            'order_ep' => $last_order
             ]);
 
         Session::flash('message-correct', 'Experiencia laboral registrada correctamente.');
-        return redirect::to('principal');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $expProf= \DB::table('exp_profs')
-            ->select('*')
-            ->where(['id_exprof' => $id, 'fk_user_ep' => Auth::user()->id])
-            ->get();
-        if(empty($expProf)){
-            Session::flash('message-error', 'Sin Acceso');
-            return redirect::to('principal');
-        }
-        else{
-            return view('contCV.edit_expProf')->with(['expProfE'=>$expProf]);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
     /**
@@ -104,8 +67,9 @@ class ExpProfController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ExpProfRequest $request, $id)
     {
+        $tabName = 'exp_prof';
         $principal = $request['principal'];
         
         $act_expProf = \App\ExpProf::find($id);
@@ -116,13 +80,15 @@ class ExpProfController extends Controller
         $act_expProf->telefono = $request->telefono;
         $act_expProf->inicio_lab = $request->inicio_lab;
         $act_expProf->fin_lab = $request->fin_lab;
+        $act_expProf->status_fin = $request->status_fin;
         $act_expProf->motivos = $request->motivos;
         $act_expProf->logros = $request->logros;
         $act_expProf->principal = ($principal === 'yes') ? "OK":"-";
+        $act_expProf->principal_vista = ($request['principal_vista'] === 'yes') ? "OK":"-";
         $act_expProf->save();
 
         Session::flash('message-correct', 'Experiencia Profesional modificada correctamente.');
-        return "<script lenguaje=\"JavaScript\">window.opener.location.reload(); window.close();</script>";
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
     /**
@@ -133,8 +99,102 @@ class ExpProfController extends Controller
      */
     public function destroy($id)
     {
+        $tabName = 'exp_prof';
         \App\ExpProf::destroy($id);
         Session::flash('message-error', 'Experiencia Profesional eliminada correctamente.');
-        return redirect::to('principal');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
+    }
+
+    /* ----------------------------------------------------------------------------------------------------------------- */
+    public function subir($id){
+
+        $tabName='exp_prof';
+
+        $id_user = Auth::user('users')->id;
+
+        $order_ep= \DB::table('exp_profs')
+            ->select('order_ep')
+            ->where('id_exprof', '=', $id )
+            ->get();
+
+        foreach ($order_ep as $o_ep) {
+            $order_expProf = $o_ep->order_ep;
+        }
+
+        $expProf_change= \DB::table('exp_profs')
+            ->select('id_exprof', 'order_ep')
+            ->where('fk_user_ep', '=', $id_user )
+            ->where('order_ep', '<', $order_expProf )
+            ->orderByRaw('order_ep desc')
+            ->limit(1)
+            ->get();
+
+        if(count($expProf_change)==0){
+            Session::flash('message-error', '¡No existen datos por arriba del seleccionado!');
+            return redirect::to('principal')->withInput(['tab'=> $tabName]);
+        }
+
+        foreach ($expProf_change as $ep_c) {
+            $order_menor = $ep_c->order_ep;
+            $id_menor = $ep_c->id_exprof;
+        }
+
+        \DB::table('exp_profs')
+            ->where('id_exprof', $id_menor)
+            ->update(['order_ep' => $order_expProf]);
+
+        \DB::table('exp_profs')
+            ->where('id_exprof', $id)
+            ->update(['order_ep' => $order_menor]);
+        
+        
+        Session::flash('message-correct', 'Experiencia profesional reordenada correctamente.');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
+    }
+
+     /* ----------------------------------------------------------------------------------------------------------------- */
+    public function bajar($id){
+        $tabName='exp_prof';
+
+        $id_user = Auth::user('users')->id;
+
+        $order_ep= \DB::table('exp_profs')
+            ->select('order_ep')
+            ->where('id_exprof', '=', $id )
+            ->get();
+
+        foreach ($order_ep as $o_ep) {
+            $order_expProf = $o_ep->order_ep;
+        }
+
+        $expProf_change= \DB::table('exp_profs')
+            ->select('id_exprof', 'order_ep')
+            ->where('fk_user_ep', '=', $id_user )
+            ->where('order_ep', '>', $order_expProf )
+            ->orderByRaw('order_ep asc')
+            ->limit(1)
+            ->get();
+
+        if(count($expProf_change)==0){
+            Session::flash('message-error', '¡No existen datos por debajo del seleccionado!');
+            return redirect::to('principal')->withInput(['tab'=> $tabName]);
+        }
+
+        foreach ($expProf_change as $ep_c) {
+            $order_mayor = $ep_c->order_ep;
+            $id_mayor = $ep_c->id_exprof;
+        }
+
+        \DB::table('exp_profs')
+            ->where('id_exprof', $id_mayor)
+            ->update(['order_ep' => $order_expProf]);
+
+        \DB::table('exp_profs')
+            ->where('id_exprof', $id)
+            ->update(['order_ep' => $order_mayor]);
+        
+        
+        Session::flash('message-correct', 'Experiencia profesional reordenada correctamente.');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 }

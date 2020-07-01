@@ -13,7 +13,7 @@ class ObjProf extends Model
      *
      * @var array
      */
-    protected $fillable = ['objetivo', 'des_obj', 'principal', 'fk_user_op'];
+    protected $fillable = ['objetivo', 'des_obj', 'principal', 'principal_vista', 'fk_user_op'];
 
     public function users() {
 		return $this->belongs_to('User');

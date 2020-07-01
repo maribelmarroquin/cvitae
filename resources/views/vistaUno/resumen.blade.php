@@ -16,15 +16,17 @@
 			</ul>
 		</div>
 <div class="marco_resumen">
-
-	<div class="imagen_per">
-		<img src="{{ asset('id/'.$dp->ruta)}}">
+	<div class="mc">
+		<div class="imagen_per">
+			<img src="{{Storage::url("$name_user/id/$dp->ruta")}}">
+		</div>
+	
+		<div class="resumen_texto">
+		@foreach ($resumen as $res)
+			<h1>{{ $res->titulo }}</h1>
+			<p>{{ $res->resumen }}</p>
+		</div>
+		@endforeach
 	</div>
-	<div class="resumen_texto">
-@foreach ($resumen as $res)
-		<h1>{{ $res->titulo }}</h1>
-		<p>{{ $res->resumen }}</p>
-	</div>
-@endforeach
 </div>
 

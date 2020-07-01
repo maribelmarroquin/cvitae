@@ -1,5 +1,16 @@
 <h1>REGISTRO DE NUEVO USUARIO</h1>
 
+@if(count($errors) > 0)
+	<div class="errors alert alert-danger alert-dismissible">
+		<h5>Valide lo siguiente:</h5>
+		<ul>
+		@foreach($errors->all() as $error)
+			<li>{{ $error }}</li>
+		@endforeach
+		</ul>
+	</div>
+@endif
+
 <table>
 	{!!Form::open(array(
 		'method'=>'POST',

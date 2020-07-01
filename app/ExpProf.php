@@ -13,5 +13,5 @@ class ExpProf extends Model
      *
      * @var array
      */
-    protected $fillable = ['empresa', 'cargo', 'funciones', 'jefe', 'telefono', 'inicio_lab', 'fin_lab', 'motivos', 'logros', 'principal', 'fk_user_ep'];
+    protected $fillable = ['empresa', 'cargo', 'funciones', 'jefe', 'telefono', 'inicio_lab', 'fin_lab', 'status_fin', 'motivos', 'logros', 'principal', 'principal_vista', 'fk_user_ep', 'order_ep'];
 }

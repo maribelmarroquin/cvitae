@@ -14,7 +14,7 @@ class Resumen extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['titulo', 'resumen', 'principal','fk_user_re'];
+	protected $fillable = ['titulo', 'resumen', 'principal', 'principal_vista', 'fk_user_re'];
 
 	public function users() {
 		return $this->belongs_to('User');

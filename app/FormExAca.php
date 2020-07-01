@@ -16,7 +16,7 @@ class FormExAca extends Model
      *
      * @var array
      */
-    protected $fillable = ['curso', 'desc', 'instituto', 'duración', 'doc_ex', 'ruta_docex', 'principal', 'fk_user_fe'];
+    protected $fillable = ['curso', 'desc', 'instituto', 'duración', 'doc_ex', 'ruta_docex', 'principal', 'principal_vista', 'fk_user_fe'];
 
     public function users() {
 		return $this->belongs_to('User');

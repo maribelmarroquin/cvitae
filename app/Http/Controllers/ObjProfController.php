@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/*use Illuminate\Http\Request;*/
 
-use App\Http\Requests;
+use App\Http\Requests\ObjProfRequest;
 use App\Http\Controllers\Controller;
 use Auth;
 use Redirect;
@@ -17,68 +17,29 @@ class ObjProfController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ObjProfRequest $request)
     {
-        \CV\ObjProf::create($request->all());
+        $tabName = 'obj_prof';
+        $id = Auth::user('users')->id;
+        $principal = $request['principal'];
+
+        \App\ObjProf::create([
+            'objetivo' => $request['objetivo'],
+            'des_obj' => $request['des_obj'],
+            'principal' => ($principal === 'yes') ? "OK":"-",
+            'principal_vista' => ($request['principal_vista'] === 'yes') ? "OK":"-",
+            'fk_user_op'=>$id,
+            ]);
 
         Session::flash('message-correct', 'Objetivo Profesional almacenado correctamente.');
-        return redirect::to('principal');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $objProf= \DB::table('obj_profs')
-            ->select('*')
-            ->where(['id_obj' => $id, 'fk_user_op' => Auth::user()->id])
-            ->get();
-        if(empty($objProf)){
-            Session::flash('message-error', 'Sin Acceso');
-            return redirect::to('principal');
-        }
-            return view('contCV.edit_objProf')->with(['objProfE'=>$objProf]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -87,14 +48,19 @@ class ObjProfController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ObjProfRequest $request, $id)
     {
-        $act_objProf = \CV\ObjProf::find($id);
-        $act_objProf -> fill($request->all());
+        $tabName = 'obj_prof';
+
+        $act_objProf = \App\ObjProf::find($id);
+        $act_objProf->objetivo = $request->objetivo;
+        $act_objProf->des_obj = $request->des_obj;
+        $act_objProf->principal = ($request['principal'] === 'yes') ? "OK":"-";
+        $act_objProf->principal_vista = ($request['principal_vista'] === 'yes') ? "OK":"-";
         $act_objProf->save();
 
         Session::flash('message-correct', 'Objetivo Profesional modificado correctamente');
-        return "<script lenguaje=\"JavaScript\">window.opener.location.reload(); window.close();</script>";
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
     /**
@@ -105,8 +71,9 @@ class ObjProfController extends Controller
      */
     public function destroy($id)
     {
-        \CV\ObjProf::destroy($id);
+        $tabName = 'obj_prof';
+        \App\ObjProf::destroy($id);
         Session::flash('message-error', 'Objetivo Profesional eliminado.');
-        return redirect::to('principal');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 }

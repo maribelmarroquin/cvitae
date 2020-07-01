@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/*use Illuminate\Http\Request;*/
 
-use App\Http\Requests;
+/*use App\Http\Requests;*/
+use App\Http\Requests\IdioInfoRequest;
+use App\Http\Requests\ClasConocimientosRequest;
 use App\Http\Controllers\Controller;
 use Session;
 use Redirect;
@@ -18,78 +20,28 @@ class IdioInfoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IdioInfoRequest $request)
     {
+        $tabName = 'idi_in';
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
 
         \App\IdioInfo::create([
             'idi_info' => $request['idi_info'],
-            'nivel' => $request['nivel'],
+            'nivel' => $request['nivel'].'%',
             'clasificacion' => $request['clasificacion'],
             'principal' => ($principal === 'yes') ? "OK":"-",
+            'principal_vista' => ($request['principal_vista'] === 'yes') ? "OK":"-",
             'fk_user_ii'=>$id,
             ]);
 
-        Session::flash('message-correct', 'Datos Académicos registrados correctamente');
-        return redirect::to('principal');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $idioInfo= \DB::table('idio_infos')
-            ->select('*')
-            ->where(['id_idinfo' => $id, 'fk_user_ii' => Auth::user()->id])
-            ->get();
-        if(empty($idioInfo)){
-            Session::flash('message-error', 'Sin Acceso');
-            return redirect::to('principal');
-        }
-        else{
-            return view('contCV.edit_idioInfo')->with(['idioInfoE'=>$idioInfo]);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        Session::flash('message-correct', 'Conocimientos registrados correctamente');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
     /**
@@ -99,19 +51,21 @@ class IdioInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IdioInfoRequest $request, $id)
     {
+        $tabName = 'idi_in';
         $principal = $request['principal'];
         
         $act_idioInfo = \App\IdioInfo::find($id);
         $act_idioInfo->idi_info = $request->idi_info;
-        $act_idioInfo->nivel = $request->nivel;
+        $act_idioInfo->nivel = $request->nivel.'%';
         $act_idioInfo->clasificacion = $request->clasificacion;
         $act_idioInfo->principal = ($principal === 'yes') ? "OK":"-";
+        $act_idioInfo->principal_vista = ($request->principal_vista === 'yes') ? "OK":"-";
         $act_idioInfo->save();
 
-        Session::flash('message-correct', 'Conocimientos Informáticos e Idiomas modificados correctamente');
-        return "<script lenguaje=\"JavaScript\">window.opener.location.reload(); window.close();</script>";
+        Session::flash('message-correct', 'Conocimientos modificados correctamente');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
     /**
@@ -122,8 +76,30 @@ class IdioInfoController extends Controller
      */
     public function destroy($id)
     {
+        $tabName = 'idi_in';
         \App\IdioInfo::destroy($id);
         Session::flash('message-error', 'Conocimientos Informáticos e Idiomas eliminados.');
-        return redirect::to('principal');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
+    }
+
+    public function storeClas(ClasConocimientosRequest $request){
+        $tabName = 'idi_in';
+        $id = Auth::user('users')->id;
+
+        \App\ClasConocimientos::create([
+            'clasificacion' => $request['clasificacion'],
+            'fk_user_clas_conocimientos'=>$id,
+            ]);
+
+        Session::flash('message-correct', 'Clasificación de conocimentos registrada correctamente');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
+    }
+
+    public function destroyClas($id)
+    {
+        $tabName = 'idi_in';
+        \App\ClasConocimientos::destroy($id);
+        Session::flash('message-error', 'Clasificación de conocimientos eliminada correctamente.');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 }

@@ -16,7 +16,7 @@ class FormAca extends Model
      *
      * @var array
      */
-    protected $fillable = ['nivel', 'especialidad', 'instituto', 'ano_ini', 'ano_fin', 'doc', 'ruta_doc', 'principal', 'fk_user_fa'];
+    protected $fillable = ['nivel', 'especialidad', 'instituto', 'ano_ini', 'ano_fin', 'status', 'doc', 'ruta_doc', 'principal', 'principal_vista', 'fk_user_fa', 'order_fa'];
 
     public function users() {
 		return $this->belongs_to('User');

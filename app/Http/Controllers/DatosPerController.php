@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/*use Illuminate\Http\Request;
+use App\Http\Requests;*/
 
-use App\Http\Requests;
+use App\Http\Requests\DatosPerRequest;
 use App\Http\Controllers\Controller;
 use Session;
 use Redirect;
@@ -21,54 +22,16 @@ class DatosPerController extends Controller
         $this->middleware('auth:web');
     }
 
-    public function index()
-    {
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DatosPerRequest $request)
     {
-        /*
-        $rules = [
-            'ruta' => 'required|max:255|image',
-            'nombre' => 'required|max:100',
-            'profesion' => 'required|max:100',
-            'fecha_nac' => 'required|date_format:Y-m-d|max:50',
-            'lugar_nac' => 'max:50',
-            'edo_civil' => 'max:50',
-            'direccion' => 'required|max:100',
-            'telefono' => 'required|numeric|max:30',
-            'email_u' => 'required|email|max:50',
-            'sitio' => 'required|url|max:100',
-        ];
-         
-        $messages = [
-            'ruta' => 'Foto requerida para el registro de tu CV.',
-            'ruta.max' =>'Has excedido la cantidad de caracteres (255) que soporta la ruta de la imagen.',
-            'ruta.image' => 'El archivo ingresado no corresponde a una imagen en formato jpeg, png, bmp, gif, o svg.',
-            'nombre' => 'El dato Nombre es requerido.'
-        ];
-        
-         
-        $this->validate($request, $rules, $messages);
-        */
 
+        $tabName = "dat_pers";
         $id = Auth::user('users')->id;
 
          \App\DatosPer::create([
@@ -86,30 +49,8 @@ class DatosPerController extends Controller
             ]);
         
         Session::flash('message-correct', 'Datos Personales registrados correctamente');
-        return redirect::to('principal');
+        return redirect::to('principal')->with($tabName, 'tabName');
         
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -119,9 +60,9 @@ class DatosPerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DatosPerRequest $request, $id)
     {
-
+        /*
         $rules = [
             'ruta' => 'image',
             'nombre' => 'required|max:100',
@@ -143,7 +84,7 @@ class DatosPerController extends Controller
         ];
          
         $this->validate($request, $rules, $messages);
-
+        */
         $act_datPer = \App\DatosPer::find($id);
         $act_datPer->ruta = $request->ruta;
         $act_datPer->nombre = $request->nombre;
@@ -160,18 +101,7 @@ class DatosPerController extends Controller
         $tabName = "dat_pers";
 
         Session::flash('message-correct', '¡Datos Personales modificados correctamente!');
-        return redirect::to('principal')->with($tabName, 'tabName');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
     //Ver imagen desde storage

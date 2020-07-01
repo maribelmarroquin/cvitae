@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-/*use CV\Http\Requests;*/
+use App\Http\Requests\ResumenRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
@@ -28,7 +28,7 @@ class CVController extends Controller
         $resumen = \DB::table('resumens')
             ->select('*')
             ->where('fk_user_re', '=', $id_user )
-            ->get();
+            ->paginate(1, ['*'], 'page_res');
         
         $datosP= \DB::table('datos_pers')
             ->select('*')
@@ -38,29 +38,40 @@ class CVController extends Controller
         $formAca= \DB::table('form_acas')
             ->select('*')
             ->where('fk_user_fa', '=', $id_user )
-            ->get();
+            ->orderByRaw('order_fa asc')
+            ->paginate(5, ['*'], 'page_fa');
 
         $formExAca= \DB::table('form_ex_acas')
             ->select('*')
             ->where('fk_user_fe', '=', $id_user )
-            ->get();
+            ->paginate(5, ['*'], 'page_fexa');
 
         $opciones = ['Curso'=>'Curso', 'Conferencias'=>'Conferencias', 'Taller'=>'Taller', 'Seminario'=>'Seminario'];
 
+        /*
         $idioInfo= \DB::table('idio_infos')
             ->select('*')
             ->where('fk_user_ii', '=', $id_user )
-            ->get();
+            ->paginate(10, ['*'], 'page_ii');
+        */
+
+        $idioInfo = \DB::table('idio_infos')
+            ->select('idio_infos.id_idinfo', 'idio_infos.idi_info', 'idio_infos.nivel', 'idio_infos.principal', 'idio_infos.principal_vista', 'idio_infos.fk_user_ii', 'clas_conocimientos.clasificacion')
+            ->join('clas_conocimientos', 'clas_conocimientos.id_clas_conocimientos', '=', 'idio_infos.clasificacion')
+            ->where('idio_infos.fk_user_ii', '=', $id_user )
+            ->orderByRaw('clasificacion asc')
+            ->paginate(10, ['*'], 'page_ii');
 
         $expProf= \DB::table('exp_profs')
             ->select('*')
             ->where('fk_user_ep', '=', $id_user )
-            ->get();
+            ->orderByRaw('order_ep asc')
+            ->paginate(5, ['*'], 'page_exp');
 
         $otros=\DB::table('otros')
             ->select('*')
             ->where('fk_user_o', '=', $id_user )
-            ->get();
+            ->paginate(5, ['*'], 'page_otros');
 
         $objProf=\DB::table('obj_profs')
             ->select('*')
@@ -68,36 +79,47 @@ class CVController extends Controller
             ->get();
 
         $consulta=\DB::table('consulta_cv')
-            ->select('user_cons', 'cont')
-            ->where('fk_user_consulta', '=', $id_user )
+            ->select('*')
+            ->where('fk_user_consulta', '=', $id_user )   
+            ->paginate(10, ['*'], 'page_con');
+            /*->get();*/
+
+        $designs = \DB::table('user_designs_pdf')
+            ->select('user_designs_pdf.fk_user_pdf' ,'catdesigns_pdf.design_pdf')
+            ->join('catdesigns_pdf', 'catdesigns_pdf.id_designs_pdf', '=', 'user_designs_pdf.fk_design_pdf')
+            ->where('user_designs_pdf.fk_user_pdf', '=', $id_user )
+            ->get();
+
+        $designs_view = \DB::table('user_designs_view')
+            ->select('user_designs_view.fk_user_design_view' ,'catdesigns_view.design_view')
+            ->join('catdesigns_view', 'catdesigns_view.id_designs_view', '=', 'user_designs_view.design_view')
+            ->where('user_designs_view.fk_user_design_view', '=', $id_user )
+            ->get();
+
+        $view_stay = \DB::table('designview_stay')
+        ->select('*')
+        ->where('fk_user_view', '=', $id_user )   
+        ->get();
+
+        $clas_ii = \DB::table('clas_conocimientos')
+            ->select('*')
+            ->where('fk_user_clas_conocimientos', '=', $id_user )   
             ->get();
         
-        return view('cv')->with(['resumen' => $resumen, 'datosP'=>$datosP, 'formAca'=>$formAca, 'formExAca'=>$formExAca, 'opciones'=>$opciones, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros, 'objProf'=>$objProf, 'consulta'=>$consulta, 'name_user'=>$name_user]);
+       /* echo $designs;*/
+
+        return view('cv')->with(['resumen' => $resumen, 'datosP'=>$datosP, 'formAca'=>$formAca, 'formExAca'=>$formExAca, 'opciones'=>$opciones, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros, 'objProf'=>$objProf, 'consulta'=>$consulta, 'designs'=>$designs, 'designs_view'=>$designs_view, 'view_stay'=>$view_stay, 'clas_ii'=>$clas_ii, 'name_user'=>$name_user]);
+        
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ResumenRequest $request)
     {
-
-       /* $this->validate($request, [
-            'titulo' => 'required|max:50',
-            'resumen' => 'required',
-            'principal' => 'required|max:3'
-        ]);*/
-
-        $rules = [
-            'titulo' => 'required|max:50',
-            'resumen' => 'required',
-            'principal' => 'max:3'
-        ];
-         
-        $messages = [
-            'titulo.required' => 'El campo Título es indispensable.',
-            'titulo.max' =>'Has excedido la cantidad de caracteres (50) que soporta Título.',
-            'resumen.required' => 'Dato resumen, requerido.',
-            'principal.max' => 'El dato del campo principal, sólo puede contener tres caracteres o menos.'
-        ];
-         
-        $this->validate($request, $rules, $messages);
 
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
@@ -105,7 +127,8 @@ class CVController extends Controller
         \App\Resumen::create([
             'titulo' => $request['titulo'],
             'resumen' => $request['resumen'],
-            'principal' => ($principal === 'yes') ? "'OK'":"-",
+            'principal' => ($request['principal'] === 'yes') ? "'OK'":"-",
+            'principal_vista' => ($request['principal_vista'] === 'yes') ? "'OK'":"-",
             'fk_user_re'=>$id,
             ]);
 
@@ -113,43 +136,38 @@ class CVController extends Controller
         //return redirect::to('principal');
         
         $tabName = 'resumen';
-        return Redirect::to('principal')->with($tabName, 'tabName');
+        return Redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 
-    public function show($id){
-        $resumen= \DB::table('resumens')
-            ->select('*')
-            ->where(['id_resumen' => $id, 'fk_user_re' => Auth::user()->id])
-            ->get();
-        if(empty($resumen)){
-            Session::flash('message-error', 'El registro no existe');
-            return redirect::to('principal');
-        }
-        else{
-            return view('contCV.edit_resumen')->with(['resumen'=>$resumen]);
-        }
-    }
-
-
-    public function update($id_resumen, Request $request){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id_resumen, ResumenRequest $request){
+        $tabName = 'resumen';
         
         $principal = $request['principal'];
 
             $act_resumen = \App\Resumen::find($id_resumen);
             $act_resumen->titulo = $request->titulo;
             $act_resumen->resumen = $request->resumen;
-            $act_resumen->principal = ($principal === 'yes') ? "OK":"-";
+            $act_resumen->principal = ($request['principal'] === 'yes') ? "OK":"-";
+            $act_resumen->principal_vista = ($request['principal_vista'] === 'yes') ? "OK":"-";
             $act_resumen->save();
 
         Session::flash('message-correct', 'Resumen modificado correctamente');
-        return "<script lenguaje=\"JavaScript\">window.opener.location.reload(); window.close();</script>";
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
 
     }
 
     public function destroy($id)
     {
+        $tabName = 'resumen';
         \App\Resumen::destroy($id);
         Session::flash('message-error', 'Resumen profesional eliminado correctamente.');
-        return redirect::to('principal');
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 }
