@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Redirect;
 use Session;
 use Auth;
+use Str;
+use Mail;
 
 class InicioController extends Controller
 {
@@ -88,16 +90,24 @@ class InicioController extends Controller
                     /**
                      * Registro de usuario
                      */
+                    $request['confirmation_code'] = Str::random(25);
+
                     \App\User::create([
                         'name' => $request['usuario'],
                         'email' => $request['email'],
                         'password' => bcrypt($request['pswtwo']),
+                        'confirmation_code' => $request['confirmation_code'],
                     ]);
+
+                    Mail::send('emails.confirmation_code', $request->all(), function($message) use ($request) {
+                        $message->to($request['email'], $request['usuario'])->subject('Por favor, confirme su correo.');
+                    });
                     
                     /**
                      * Registro de Diseños de Obsequio
                      */
                     $this->regDisenos($request['email']);
+
                     
                     /**
                      * Creación de directorios
@@ -110,7 +120,7 @@ class InicioController extends Controller
                     \Storage::makeDirectory($directory_id);
                     \Storage::makeDirectory($directory_docs);
 
-                    Session::flash('message-correct', 'Usuario registrado correctamente.');
+                    Session::flash('message-correct', 'Usuario registrado correctamente. Le hemos enviado un mensaje a su cuenta de correo electrónico para verificación. Por favor, realice la verificación para continuar usando la plataforma.');
                 }
             }
         }
@@ -158,6 +168,13 @@ class InicioController extends Controller
             'fk_user_design_view' => $id_u,
             'vigencia_ini_view' => \Carbon\Carbon::now(),
             'vigencia_fin_view' => \Carbon\Carbon::now()->addYears(10),
+        ]);
+        /**
+         * Diseño de vista que permanece.
+         */
+        \App\DesignViewStay::create([
+            'view_stay' => 'EleganceView',
+            'fk_user_view' => $id_u,
         ]);
     }
 }

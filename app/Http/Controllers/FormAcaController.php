@@ -38,7 +38,13 @@ class FormAcaController extends Controller
             $last_order = $fa_o->order_fa;
         }
 
-        $last_order = $last_order+1;
+        if(empty($last_order)){
+            $last_order = 1;
+        }
+        else{
+            $last_order = $last_order+1;
+        }
+        
 
         \App\FormAca::create([
             'nivel' => $request['nivel'],

@@ -33,7 +33,7 @@
 					<td>
 
 						<select name="clasificacion" class="custom-select form-control border-secondary" id="inputGroupSelect04">
-							<option selected>{{$ii->clasificacion}}</option>
+							<option selected value="{{$ii->id_clas_conocimientos}}">{{$ii->clasificacion}}</option>
 							@foreach ($clas_ii as $ci)
 							<option value="{{$ci->id_clas_conocimientos}}">{{$ci->clasificacion}}</option>
 							@endforeach

@@ -19,7 +19,7 @@ Route::get('/', function () {
 //Route::resource('/', 'IndexController');
 Route::resource('/', 'InicioController')->only(['index', 'store']);
 
-
+Route::get('/register/verify/{code}', 'VerifyEmailController@verify');
 
 /*Administración de datos del curriculum*/
 Route::resource('principal', 'CVController')->only(['index', 'store', 'update', 'destroy']);

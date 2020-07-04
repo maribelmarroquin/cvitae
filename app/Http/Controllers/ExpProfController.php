@@ -37,7 +37,12 @@ class ExpProfController extends Controller
             $last_order = $ep_o->order_ep;
         }
 
-        $last_order = $last_order+1;
+        if(empty($last_order)){
+            $last_order = 1;
+        }
+        else{
+            $last_order = $last_order+1;
+        }
 
         \App\ExpProf::create([
             'empresa' => $request['empresa'],

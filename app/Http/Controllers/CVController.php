@@ -56,7 +56,7 @@ class CVController extends Controller
         */
 
         $idioInfo = \DB::table('idio_infos')
-            ->select('idio_infos.id_idinfo', 'idio_infos.idi_info', 'idio_infos.nivel', 'idio_infos.principal', 'idio_infos.principal_vista', 'idio_infos.fk_user_ii', 'clas_conocimientos.clasificacion')
+            ->select('idio_infos.id_idinfo', 'idio_infos.idi_info', 'idio_infos.nivel', 'idio_infos.principal', 'idio_infos.principal_vista', 'idio_infos.fk_user_ii', 'clas_conocimientos.id_clas_conocimientos', 'clas_conocimientos.clasificacion')
             ->join('clas_conocimientos', 'clas_conocimientos.id_clas_conocimientos', '=', 'idio_infos.clasificacion')
             ->where('idio_infos.fk_user_ii', '=', $id_user )
             ->orderByRaw('clasificacion asc')

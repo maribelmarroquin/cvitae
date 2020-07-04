@@ -24,31 +24,19 @@ class SessionController extends Controller {
 	}
 	
 	public function store(Request $request) {
-		/*if (Auth::attempt('users', ['email' => $request['email'], 'password' => $request['password']])) {
-			return Redirect::to('principal');
-		}*/
 
 		$rules = [
             'email' => 'email|required|max:255',
             'password' => 'required'
         ];
-         /*
-        $messages = [
-			'email' => 'Ingrese una estructura de correo electrónico válida.',
-            'email.required' => 'Es necesario ingresar la cuenta de correo que registró en ésta plataforma.',
-			'email.max' =>'Has excedido la cantidad de caracteres (255) que soporta el campo "usuario".',
-            'password.required' => 'Es necesario ingresar la contraseña de su cuenta.'
-        ];
-         
-        $this->validate($request, $rules, $messages);
-		*/
+        
 		$this->validate($request, $rules);
 
-		if (Auth::guard('web')->attempt(['email' => $request['email'], 'password' => $request['password']])) {
+		if (Auth::guard('web')->attempt(['email' => $request['email'], 'password' => $request['password'], 'confirmed' => 1])) {
 			return Redirect::to('principal');
 		}
 
-		Session::flash('message-error', 'Acceso denegado. Los datos son incorrectos.');
+		Session::flash('message-error', 'Acceso denegado. Valide lo siguiente: que sus credenciales de acceso sean correctas, de no se así, puede realizar el restablecimiento de su contraseña en "Olvidé mi contraseña"; que se haya realizado la verificación de su correo electrónico. Una vez Realizado lo anterior, intente nuevamente.');
 		return Redirect::to('/');
 
 	}

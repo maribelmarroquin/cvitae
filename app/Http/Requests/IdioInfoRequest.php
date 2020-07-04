@@ -29,7 +29,7 @@ class IdioInfoRequest extends FormRequest
         return [
             'idi_info' => 'required|max:100',
             'nivel' => 'numeric|required|max:100|min:1',
-            'clasificacion' => 'required|max:10',
+            'clasificacion' => 'numeric|required',
             'principal' => 'max:3',
             'principal_vista' => 'max:3'
         ];

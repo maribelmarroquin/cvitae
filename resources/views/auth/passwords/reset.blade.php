@@ -75,41 +75,6 @@
       </form>
     </div>
 
-    {{--
-    @if (session('status'))
-      <div class="alert alert-success">
-        {{session('status')}}
-      </div>
-    @endif
-
-    <table>
-        {!!Form::open(array(
-            'method'=>'POST',
-            'route'=>'password.update'))!!}
-            @csrf
-            {{ Form::hidden('token', $token) }}
-
-          <tr>
-            <th>{!!Form::label('email', 'Correo electrónico:')!!}</th>
-            <td><input type="email" class="form-control" name="email" id="email" value={{old('email')}}></td>
-            
-          </tr>
-            <tr>
-              <th>{!!Form::label('password', 'Contraseña:')!!}</th>
-              <td>{!!Form::password('password', array('class' => 'form-control', 'required'))!!}</td>
-            </tr>
-            <tr>
-              <th>{!!Form::label('password-confirm', 'Reingresa la contraseña:')!!}</th>
-              <td>{!!Form::password('password-confirm', array('class' => 'form-control', 'required'))!!}</td>
-            </tr>
-        <tr>
-            <td></td>
-            <td>{!!Form::submit('Iniciar Sesión', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;'))!!}</td>
-        </tr>
-        {!!Form::close()!!}
-    </table>
-    --}}
-
   </div>
 
 </div>
