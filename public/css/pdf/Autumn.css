@@ -50,12 +50,13 @@ header {
   width: 70%;
   text-align: center;
   border-radius:20px 20px 20px 20px;
+  font-size: 10pt;
 }
 .domicilio br{
   display: none;
 }
 .txt_datos{
-  font-size: 15px;
+  font-size: 11pt;
   text-align: center;
   margin-left: -200px;
   overflow-wrap: break-word;
@@ -73,7 +74,7 @@ header {
   display: none;
 }
 .sitio br{
-  display: none;
+  display: block;
 }
 .border_bottom{
   background-color: #90AFC5;
@@ -113,11 +114,12 @@ header {
   height: auto;
 }
 .grid2{
-  page-break-before: always;
+  /*page-break-before: always;*/
   width: 100%;
   margin: 20px;
   clear: left;
   margin: 20px 20px 20px 0px;
+  float: left;
 }
 .grid2 > div {
   padding: 1px 20px 0px 20px;
@@ -160,7 +162,7 @@ div .form_aca{
 }
 .form_aca h4{
   padding: 10px;
-  margin: 0px;
+  margin: -2px 0px 0px 0px;
   background-color: #336B87;
   color: #FFFFFF;
   text-transform: uppercase;
@@ -169,13 +171,14 @@ div .form_aca{
 .fa p{
   font-size: 12px;
 }
-/*------------Esperiencia profesional----------------*/
+/*------------Experiencia profesional----------------*/
 
 div .exp_prof{
   border-radius:10px 10px 10px 10px;
   float: left;
   width: 63%;
   margin-left: 20px;
+  padding-bottom: 10px;
  }
  .exp_prof h4{
   padding: 10px;
@@ -224,17 +227,20 @@ div .exp_prof{
   margin-top: 5px;
  }
 /* -        Formación extra-académica        - */
-div .form_exaca{
-  /*
-  width: 30%;
-  float: left;
-  */
+.form_exaca{
+  position: relative;
+  clear: left;
+  left: 55.5%;
+  margin-top: 10px;
+  margin-left: -9px;
+  margin-right: -10px;
+  border-top: 5px solid #336B87;
  }
  .form_exaca h4{
   background-color: #336B87;
   color: #FFFFFF;
   padding: 10px;
-  margin: 0px 0px 10px 0px;
+  margin: 0px 20px 10px 20px;
   color: #FFFFFF;
   text-transform: uppercase;
   text-align: center;
@@ -251,33 +257,37 @@ div .form_exaca{
 .fe_des{
   background-color: #90AFC5;
   padding: 5px;
-  margin: -5px 0px -5px 0px;
+  margin: -10px 0px -10px 0px;
   font-size: 13px;
   border-radius: 0px 0px 5px 5px;
 }
 .fe_div{
   height: 2px;
   background-color: #336B87; 
+  margin: -10px 0px -20px 0px;
 }
 /* -        Idiomas e informática (Conocimientos)        - */
 div .idio_info{
   border-top: #763626 5px solid;
   border-bottom: #763626 5px solid;
   padding: 0px 20px 20px 20px;
-  width: 30%;
-  float: left;
+  width: 28%;
+  /*float: left;*/
+  position: absolute;
+  left: 10px;
+  /*page-break-before: always;*/
 }
 .idio_info h4{
   background-color: #763626;
   color: #FFFFFF;
   padding: 10px;
-  margin: 0px 50px 10px 50px;
+  margin: 0px 20px 10px 20px;
   color: #FFFFFF;
   text-transform: uppercase;
   text-align: center;
 }
 .ii{
-  font-size: 14px;
+  font-size: 10pt;
   padding-bottom: 5px;
   color: #2A3132;
 }
@@ -291,11 +301,15 @@ div .idio_info{
   background-color:#336B87; 
   color: #ffffff; 
 }
+/* ------------------------- Otros Datos ------------------------------*/
 div .otros{
   border-radius:0px 0px 10px 10px;
   color: #fff;
   border: solid 2px #2A3132;
-  margin-top: 20px;
+  margin-top: 40px;
+  position: relative;
+  clear: left;
+  left: 55.5%;
 }
 .o{
   font-size: 14px;
@@ -319,13 +333,16 @@ div .otros{
  }
  .web{
   text-align: left;
-  margin: -5px 20px 20px -300px;
+  margin: 20px 20px 20px 0px;
   background-color: #763626;
   color: #FFFFFF;
-  width: 270px;
-  clear: left;
-  border-radius: 0px 20px 20px 0px;
+  /*width: 270px;*/
+  width: 100%;
+  border-radius: 20px 0px 0px 20px;
   font-size: 8pt;
+  position: relative;
+  clear: left;
+  left: 65%;
 }
 .titulo_nota{
   font-size: 12pt;

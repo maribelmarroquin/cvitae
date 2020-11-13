@@ -30,7 +30,7 @@
 <div class="datos">
 	<p class="domicilio">Domicilio: <br><b>{{ $dp->direccion }}</b></p>
 	<p class="txt_datos">
-		<span class="edad"><img src="open-iconic/png/eye.png"> Edad: <br><b>{{ $dp->fecha_nac }} años<br><br></b> </span>
+		<span class="edad"><img src="open-iconic/png/eye.png"> Edad: <br><b>{{ \Carbon\Carbon::parse($dp->fecha_nac)->age }} años<br><br></b> </span>
 		<span class="telefono"><img src="open-iconic/png/eye.png"> Teléfono/celular: <br> <b>{{ $dp->telefono }}<br><br></b> </span> 
 		<span class="email"><img src="open-iconic/png/eye.png"> E-mail: <br><b>{{ $dp->email_u }}<br><br></b> </span>
 	 

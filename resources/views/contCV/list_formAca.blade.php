@@ -4,6 +4,16 @@
 <table class="table">
   	<thead class="thead-dark">	
 		<tr>
+			<td colspan="12">
+				<nav class="navbar navbar-light bg-light">
+					<form class="form-inline">
+					  <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+					  <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><img src="{{asset("/open-iconic/png/magnifying-glass-2x.png")}}"></button>
+					</form>
+				  </nav>
+			</td>
+		</tr>
+		<tr>
 			<th scope="col">Orden:</th>
 			<th scope="col">Nivel académico:</th>
 			<th scope="col">Especialidad:</th>

@@ -62,6 +62,9 @@ class DatosPerController extends Controller
      */
     public function update(DatosPerRequest $request, $id)
     {
+        $user = Auth::user('users')->name;
+        echo $user;
+
         /*
         $rules = [
             'ruta' => 'image',

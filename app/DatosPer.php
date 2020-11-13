@@ -20,7 +20,12 @@ class DatosPer extends Model
 
 
     public function setRutaAttribute($ruta){
-        $nameUser = Auth::user('users')->name;
+        $user = auth()->user();
+        $nameUser = $user['name'];
+        
+        \Storage::disk('public')->delete("$nameUser/id/$this->ruta");
+
+
         if (!empty($ruta)) {
             $name = Carbon::now()->day.Carbon::now()->month.Carbon::now()->year.'_'.Carbon::now()->hour.Carbon::now()->minute.Carbon::now()->second.'_'.$ruta->getClientOriginalName();
             $this->attributes['ruta']=$name;
