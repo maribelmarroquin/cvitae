@@ -27,7 +27,7 @@ class DatosPerRequest extends FormRequest
     public function rules()
     {
         return [
-            'ruta' => 'max:1000|image',
+            'ruta' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
             'nombre' => 'required|max:100',
             'profesion' => 'required|max:100',
             'fecha_nac' => 'required|date_format:Y-m-d|max:50',

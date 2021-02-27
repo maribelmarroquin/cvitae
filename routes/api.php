@@ -41,6 +41,10 @@ Route::prefix('/v1/cvitae')->group(function () {
 			    Route::post('updater', 'ApiDatosPersonalesController@updater');
 			    /*Route::post('destroyer', 'ApiDatosPersonalesController@destroyer');*/
 			});
+
+			Route::prefix('formacion_academica')->group(function(){
+				Route::post('register', 'ApiFormacionAcademicaController@register');
+			});
 		    
 		});
 	});
