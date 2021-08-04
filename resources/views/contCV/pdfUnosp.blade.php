@@ -1,7 +1,9 @@
+
 <html>
 <head>
 	
   <link rel="stylesheet" type="text/css" href={{$design}}>
+  <?php setlocale(LC_TIME, "Spanish") ?>
 </head>
 <body>
 <!--------------------------------------If de validación de datos vacíos-------------------------------------------->
@@ -14,6 +16,7 @@
 @foreach ($resumen as $r)
 
 @endforeach
+<div class="principal">
   <header>
     <h2 class="txt_header">{{ $r->titulo }}</h2>
     <h3 class="txt_header">{{ $dp->nombre }}</h3>
@@ -31,12 +34,12 @@
 <div class="datos">
 	<p class="domicilio">Domicilio: <br><b>{{ $dp->direccion }}</b></p>
 	<p class="txt_datos">
-		<span class="edad"><img src="open-iconic/png/eye.png"> Edad: <br><b>{{ \Carbon\Carbon::parse($dp->fecha_nac)->age }} años<br><br></b> </span>
-		<span class="telefono"><img src="open-iconic/png/eye.png"> Teléfono/celular: <br> <b>{{ $dp->telefono }}<br><br></b> </span> 
-		<span class="email"><img src="open-iconic/png/eye.png"> E-mail: <br><b>{{ $dp->email_u }}<br><br></b> </span>
+		<span class="edad"><img src="open-iconic/png/eye.png"></span> Edad: <br><b>{{ \Carbon\Carbon::parse($dp->fecha_nac)->age }} años</b> <br><br>
+		<span class="telefono"><img src="open-iconic/png/eye.png"></span> Teléfono/celular: <br> <b>{{ $dp->telefono }}</b>  <br><br>
+		<span class="email"><img src="open-iconic/png/eye.png"></span> E-mail: <br><b>{{ $dp->email_u }}</b> <br><br>
 	 
 @if($dp->sitio ==! "")
-		<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"> Sitio web: <br><b>{{ $dp->sitio }}<br></b></span> 
+		<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"></span> Sitio web: <br><b>{{ $dp->sitio }}<br></b> 
 @endif
 	</p>
 	<div class="border_bottom"> </div>
@@ -49,7 +52,7 @@
 		{{ $r->resumen }}
 	</p>
 </div>
-
+</div>
 @else
 <header>
 	<h5 class="txt header">No ha registrado sus datos personales y su resumen profesional.</h5>
@@ -63,7 +66,7 @@
 	<h4>Formación Académica</h4>
 	@foreach ($formAca as $fa)
 	<div class="form">
-		<div class="form_dur">{{ $fa->ano_ini }} - {{ $fa->ano_fin }}</div>
+		<div class="form_dur">{{ strftime("%B de %Y", strtotime($fa->ano_ini)) }} a {{ strftime("%B de %Y", strtotime($fa->ano_fin)) }}</div>
 		<div class="fa">
 			{{ $fa->nivel }}<br>
 			@if (!empty($fa->especialidad))
@@ -88,11 +91,14 @@
 	<div class="experiencia">
 		<div class="ep">
 			
-			<div class="duracion"><span class="icon_empleo"></span>{{ $ep->inicio_lab }} - {{ $ep->fin_lab }}</div>
-			<div class="empresa"><span class="auxiliar">Puesto de </span><strong>{{ $ep->cargo }}</strong> <span class="auxiliar">en </span><br><i>{{ $ep->empresa }}</i></div>
+			<div class="duracion"><span class="icon_empleo"></span>{{ strftime("%B de %Y", strtotime($ep->inicio_lab)) }} a {{ strftime("%B de %Y", strtotime($ep->fin_lab)) }}</div>
+			<div class="empresa"><span class="auxiliar">Puesto de</span><strong>{{ $ep->cargo }}</strong><span class="auxiliar">en: </span><br><i>{{ $ep->empresa }}</i></div>
 		</div>
 		<div class="funciones">
 			<span class="fun"><span class="label_funciones">Funciones: </span>{{ $ep->funciones }}</span><br>
+			@if ($ep->herramientas != null || $ep->herramientas!= '' || !empty($ep->herramientas))
+				<div class="herramientas"><span class="label_funciones">Herramientas utilizadas: </span>{{ $ep->herramientas }}</div>
+			@endif
 			<div class="logros"><strong>Logros:</strong> <span class="fun">{{ $ep->logros }}</span></div>
 		</div>
 	</div>
@@ -142,22 +148,22 @@
 		
 	@endif
 
-<!--------------------------------------Otros datos-------------------------------------------->
-@if(count($otros) ==! 0)
-<div class="otros">
-	<h4>Datos Adicionales</h4>
-	<ul class="lis_o">
-		@foreach ($otros as $o)
-		<li><div class="o">
-			{{ $o->dato }}: <strong>{{ $o->des_dato }}</strong>
-			</div>
-		</li>
-		@endforeach
-	</ul>
-</div>
-@else
-	
-@endif
+	<!--------------------------------------Otros datos-------------------------------------------->
+	@if(count($otros) ==! 0)
+	<div class="otros">
+		<h4>Datos Adicionales</h4>
+		<ul class="lis_o">
+			@foreach ($otros as $o)
+			<li><div class="o">
+				{{ $o->dato }}: <strong>{{ $o->des_dato }}</strong>
+				</div>
+			</li>
+			@endforeach
+		</ul>
+	</div>
+	@else
+		
+	@endif
 
 </div>
 

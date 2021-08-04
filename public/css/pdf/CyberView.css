@@ -1,0 +1,354 @@
+/*
+Paleta de colores:
+    #728CA3
+    #73C0F4
+    #E6EFF3
+    #F3E4C6
+    #8F4F06
+*/
+/*
+@font-face{
+	font-family: "eaglese";
+	src: url("./font/eaglese.ttf");
+}
+
+@font-face{
+	font-family: "earth";
+	src: url("./font/earth.ttf");
+}
+
+@font-face{
+	font-family: "hand";
+	src: url("./font/hand_x.ttf");
+}
+
+@font-face{
+	font-family: "handvetica";
+	src: url("./font/Handvetica.ttf");
+}
+
+@font-face{
+	font-family: "panda";
+	src: url("./font/Panda-Regular.ttf");
+}
+*/
+*, body{
+    margin:5px;
+    padding: 0px;
+}
+
+.principal{
+    position: absolute;
+    background-color: #728CA3;
+    /*background-color: #73C0F4;*/
+    width: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /*border-right: 5px solid rgba(114, 140, 163, 0.356);
+    border-bottom: 5px solid rgba(114, 140, 163, 0.356);*/
+}
+
+.txt_header{
+    padding: 5px;
+    text-align: center;
+}
+
+header{
+    position: relative;
+    color: #E6EFF3;
+}
+
+header h2{
+    color: #E6EFF3;
+    /*color: #8F4F06;*/
+    text-transform: uppercase;
+}
+header h3{
+    background-color: #73C0F4;
+    margin-left: -10px;
+    margin-right: -10px;
+    /*background-color: #728CA3;*/
+}
+
+.img_id{
+    width: 200px;
+    position: relative;
+    margin-top: 35px;
+    margin-left: 16px;
+    background-color: #E6EFF3;
+    border-radius: 5px;
+}
+
+.datos{
+    position: relative;
+    text-align: left;
+    font-size: 9pt;
+    color:  #E6EFF3;
+    padding: 0px 5px 5px 5px;
+    margin-top: -20px;
+}
+.txt_datos b{
+    margin-bottom: 20px;
+}
+.domicilio{
+    margin-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+.domicilio b{
+    margin-left: -10px;
+}
+.edad, .telefono, .email{
+    text-align: left;
+    margin-left: -25px;
+}
+p.txt_datos>span>img{
+    width: 0px;
+}
+.resumen{
+    position: relative;
+    padding: 5px 10px 10px 10px;
+    color: #E6EFF3;
+}
+
+.resumen h4{
+    text-align: center;
+    /*background-color:#728CA3;*/
+    background-color: #73C0F4;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 10px 0px 10px 0px;
+}
+
+.resumen p{
+    text-align: justify;
+    padding-top: 5px;
+    font-size: 10pt;
+}
+
+/*
+---------------------------------------------------------
+   Sección de Formación académica y experiencia laboral
+---------------------------------------------------------
+*/
+.grid1{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 70%;
+    position: relative;
+    left: 30%;
+    top: 0px;
+    padding: 10px;
+}
+
+.form_aca{
+    /*background-color: wheat;*/
+    margin-top: -16px;
+}
+.form_aca h4::before{
+    content: url(../../cyberView/book-2x.png); 
+    margin-right: 10px;
+}
+.form_aca h4{
+   /*background-color: #8F4F06;*/
+   background-color:  #15297C;
+   color: #E6EFF3;
+   margin-left: -10px;
+   padding-left: 10px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+.form{
+    font-size: 10pt;
+    padding-top: 5px;
+}
+.form_dur{
+    text-align: center;
+    background-color: #E6EFF3;
+    margin-left: -10px;
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+
+.exp_prof{
+    margin-top: 10px;
+    margin-right: 10px;
+    /*background-color: rgb(179, 245, 240);*/
+}
+.exp_prof::after{
+    content: url(../../cyberView/arrow-thick-bottom-2x.png);
+    margin-left: -6px;
+}
+.exp_prof h4::before{
+    content: url(../../cyberView/briefcase-2x.png);
+    margin-right: 10px;
+}
+.exp_prof h4{
+    /*background-color: #8F4F06;*/
+    background-color: #73C0F4;
+    /*color: #F3E4C6;*/
+    color: #ffffff;
+    margin-left: -10px;
+    margin-right: 0px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.experiencia{
+    font-size: 10pt;
+    margin-top: 10px;
+    border-left: 4px solid #8e4e06;
+}
+
+.duracion{
+    text-align: center;
+    background-color: #E6EFF3;
+    margin-right: 10px;
+    font-weight: 400;
+    margin-left: -10px;
+    color: #728CA3;
+    text-transform: uppercase;
+}
+.duracion::before{
+    content: "[";
+    font-weight: bolder;
+    margin-right: 10px;
+}
+.duracion::after{
+    content: "]";
+    font-weight: bolder;
+    margin-left: 10px;
+}
+
+.ep{
+    padding-left: 10px;
+}
+
+.funciones{
+    background-color: #F3E4C6;
+    padding: 10px;
+    margin-right: 10px;
+}
+.herramientas{
+    background-color: #ffffff;
+    padding: 5px;
+    color: #404c57;
+}
+.label_funciones{
+    font-weight: bold;
+}
+
+/*
+---------------------------------------------------------
+   Sección de Conocimientos, formación extracadémica y 
+   datos adicionales
+---------------------------------------------------------
+*/
+
+.grid2{
+    /*page-break-before: always;*/
+    /*position:absolute;
+    top: 0px;
+    */
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.idio_info{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    width: 30%;
+    margin: 10px;
+}
+
+.idio_info h4{
+    /*background-color: #8F4F06;*/
+    background-color:  #15297C;
+    color: #E6EFF3;
+    margin-left: -23px;
+    margin-right: -2px;
+    margin-top: -5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.ii{
+    font-size: 10pt;
+}
+.ii_bar{
+    width: 200px;
+    height: 15px;
+    border-radius:5px;
+    background-color: #E6EFF3;
+    border-width: 12px;
+}
+.ii_percent{
+    background-color: #728CA3;
+    height: 15px;
+    border-radius:5px;
+    font-size: 9pt;
+    text-align: center;
+    color: #E6EFF3;
+}
+
+.form_otro{
+    position: relative;
+    width: 70%;
+    left: 30%;
+    margin-top: -60px;
+}
+
+.form_exaca{
+    margin: 10px;
+    padding: 10px;
+}
+
+.form_exaca h4{
+    background-color: #73C0F4;
+    color: #ffffff;
+    margin-left: -10px;
+    margin-right: -22px;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.fe{
+    background-color: #E6EFF3;
+    border-bottom: #728CA3 3px solid;
+    padding: 5px 20px 5px 20px;
+    font-size: 10pt;
+}
+
+.fe_des{
+    background-color: #3378AD;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.otros{
+    margin: 10px;
+    padding: 10px;
+}
+.otros h4{
+    background-color: #15297C;
+    color: #ffffff;
+    margin-left: -10px;
+    /*margin-right: -22px;*/
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.lis_o{
+    font-size: 10pt;
+    list-style-image: url(../../cyberView/check-2x.png);
+}
+.obj_prof{
+    width: 100%;
+    display: inline-block;
+    font-size: 11pt;
+}
+.obj_prof h4{
+    color: #15297C;
+}

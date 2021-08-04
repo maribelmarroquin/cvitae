@@ -32,6 +32,10 @@
 		<td>{!!Form::textarea('funciones', null, array('size' => '50x4', 'class'=>'form-control border-secondary rounded', 'required', 'maxlength'=>'500'))!!}</td>
 	</tr>
 	<tr>
+		<th>{!!Form::label('herramientas', 'Herramientas utilizadas:')!!}</th>
+		<td>{!!Form::textarea('herramientas', null, array('size' => '50x4', 'class'=>'form-control border-secondary rounded', 'required', 'maxlength'=>'300'))!!}</td>
+	</tr>
+	<tr>
 		<th>{!!Form::label('jefe', '*Nombre de Jefe inmediato:')!!}</th>
 		<td>{!!Form::text('jefe', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
 	</tr>

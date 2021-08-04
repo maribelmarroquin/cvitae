@@ -68,7 +68,8 @@ class UsersController extends Controller
      */
     public function register(Request $request)
     {
-
+       
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -84,16 +85,17 @@ class UsersController extends Controller
 
         $request['confirmation_code'] = Str::random(25);
 
-
         $user = \App\User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'confirmation_code' => $request['confirmation_code'],
         ]);
+        
+        $request['usuario'] = $request['name'];
 
         Mail::send('emails.confirmation_code', $request->all(), function($message) use ($request) {
-            $message->to($request['email'], $request['name'])->subject('Por favor, confirme su correo.');
+            $message->to($request['email'],  $request['usuario'])->subject('Por favor, confirme su correo.');
         });
 
         /**

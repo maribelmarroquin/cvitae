@@ -48,6 +48,7 @@ class ExpProfController extends Controller
             'empresa' => $request['empresa'],
             'cargo' => $request['cargo'],
             'funciones' => $request['funciones'],
+            'herramientas' => $request['herramientas'],
             'jefe' => $request['jefe'],
             'telefono' => $request['telefono'],
             'inicio_lab' => $request['inicio_lab'],
@@ -81,6 +82,7 @@ class ExpProfController extends Controller
         $act_expProf->empresa = $request->empresa;
         $act_expProf->cargo = $request->cargo;
         $act_expProf->funciones = $request->funciones;
+        $act_expProf->herramientas = $request->herramientas;
         $act_expProf->jefe = $request->jefe;
         $act_expProf->telefono = $request->telefono;
         $act_expProf->inicio_lab = $request->inicio_lab;

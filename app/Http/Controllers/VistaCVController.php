@@ -119,7 +119,7 @@ class VistaCVController extends Controller
                 ->get();
 
             $expProf= \DB::table('exp_profs')
-                ->select('empresa', 'cargo', 'funciones', 'jefe', 'telefono', 'inicio_lab', 'fin_lab', 'motivos', 'logros')
+                ->select('empresa', 'cargo', 'funciones', 'herramientas', 'jefe', 'telefono', 'inicio_lab', 'fin_lab', 'motivos', 'logros')
                 ->where('fk_user_ep', '=', $fk_user )
                 ->where('principal_vista', '=', 'OK' )
                 ->orderByRaw('order_ep asc')

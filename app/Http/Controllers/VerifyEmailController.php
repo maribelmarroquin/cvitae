@@ -18,7 +18,7 @@ class VerifyEmailController extends Controller
             $user->confirmation_code = null;
             $user->save();
 
-            Session::flash('message-correct', 'Has confirmado correctamente tu correo!');
+            Session::flash('message-correct', 'Se ha hecho la verificación de tu correo correctamente.');
         }
         return redirect('/');
     }

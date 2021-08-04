@@ -24,6 +24,10 @@
                         <td>{{ $ep->funciones }}</td>
                     </tr>
                     <tr>
+                        <th class="table-dark">Herramientas utilizadas:</th>
+                        <td>{{ $ep->herramientas }}</td>
+                    </tr>
+                    <tr>
                         <th class="table-dark">Jefe:</th>
                         <td>{{ $ep->jefe }}</td>
                     </tr>

@@ -79,7 +79,7 @@ class PDFUnoController extends Controller
             ->get();
 
         $pdf = PDF::loadView('contCV.pdfUnosp', ['resumen' => $resumen, 'datosP'=>$datosP, 'formAca'=>$formAca, 'formExAca'=>$formExAca, 'idioInfo'=>$idioInfo, 'expProf'=>$expProf, 'otros'=>$otros, 'objProf'=>$objProf, 'design'=>$design,  'name_user'=>$name_user]);
-        return $pdf->stream('cv.pdf');
+        return $pdf->stream('cv_'.$name_user.'.pdf');
 
     }
 
