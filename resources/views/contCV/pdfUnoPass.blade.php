@@ -1,6 +1,7 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href={{$design}}>
+  <?php setlocale(LC_TIME, "Spanish") ?>
 </head>
 <body>
 @if (count($resumen) ==! 0 || count($datosP) ==! 0 || count($formAca) ==! 0 || count($idioInfo) ==! 0 || count($formExAca) ==! 0 || count($expProf) ==! 0 || count($otros) ==! 0 )
@@ -13,42 +14,43 @@
 @foreach ($resumen as $r)
 
 @endforeach
-  <header>
-    <h2 class="txt_header">{{ $r->titulo }}</h2>
-    <h3 class="txt_header">{{ $dp->nombre }}</h3>
-  </header>
+<div class="principal">
+	<header>
+		<h2 class="txt_header">{{ $r->titulo }}</h2>
+		<h3 class="txt_header">{{ $dp->nombre }}</h3>
+	</header>
 
-  @if($dp->ruta ==! "")
-  <img src="storage/{{$name_user}}/id/{{$dp->ruta}}" class="img_id" />
-  {{--<img class="img_id" src="id/{{ $dp->ruta }}">--}}
-  @else
-  <h5 class="sin_foto">Ingrese una fotografía en el sistema.</h5>
-  @endif
+	@if($dp->ruta ==! "")
+	<img src="storage/{{$name_user}}/id/{{$dp->ruta}}" class="img_id" />
+	{{--<img class="img_id" src="id/{{ $dp->ruta }}">--}}
+	@else
+	<h5 class="sin_foto">Ingrese una fotografía en el sistema.</h5>
+	@endif
 
-<!--------------------------------------datos Personales-------------------------------------------->
+	<!--------------------------------------datos Personales-------------------------------------------->
 
-<div class="datos">
-	<p class="domicilio">Domicilio: <br><b>{{ $dp->direccion }}</b></p>
-	<p class="txt_datos">
-		<span class="edad"><img src="open-iconic/png/eye.png"> Edad: <br><b>{{ \Carbon\Carbon::parse($dp->fecha_nac)->age }} años<br><br></b> </span>
-		<span class="telefono"><img src="open-iconic/png/eye.png"> Teléfono/celular: <br> <b>{{ $dp->telefono }}<br><br></b> </span> 
-		<span class="email"><img src="open-iconic/png/eye.png"> E-mail: <br><b>{{ $dp->email_u }}<br><br></b> </span>
-	 
-@if($dp->sitio ==! "")
-		<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"> Sitio web: <br><b>{{ $dp->sitio }}<br></b></span> 
-@endif
-	</p>
-	<div class="border_bottom"> </div>
+	<div class="datos">
+		<p class="domicilio">Domicilio: <br><b>{{ $dp->direccion }}</b></p>
+		<p class="txt_datos">
+			<span class="edad"><img src="open-iconic/png/eye.png"> Edad: <br><b>{{ \Carbon\Carbon::parse($dp->fecha_nac)->age }} años<br><br></b> </span>
+			<span class="telefono"><img src="open-iconic/png/eye.png"> Teléfono/celular: <br> <b>{{ $dp->telefono }}<br><br></b> </span> 
+			<span class="email"><img src="open-iconic/png/eye.png"> E-mail: <br><b>{{ $dp->email_u }}<br><br></b> </span>
+		
+	@if($dp->sitio ==! "")
+			<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"> Sitio web: <br><b>{{ $dp->sitio }}<br></b></span> 
+	@endif
+		</p>
+		<div class="border_bottom"> </div>
+	</div>
+
+	<!--------------------------------------Resumen-------------------------------------------->
+	<div class="resumen">
+		<h4>Extracto Profesional</h4>
+		<p>
+			{{ $r->resumen }}
+		</p>
+	</div>
 </div>
-
-<!--------------------------------------Resumen-------------------------------------------->
-<div class="resumen">
-	<h4>Extracto Profesional</h4>
-	<p>
-		{{ $r->resumen }}
-	</p>
-</div>
-
 @else
 <header>
 	<h5 class="txt header">No ha registrado sus datos personales y su resumen profesional.</h5>
@@ -62,7 +64,7 @@
 	<h4>Formación Académica</h4>
 	@foreach ($formAca as $fa)
 	<div class="form">
-		<div class="form_dur">{{ $fa->ano_ini }} - {{ $fa->ano_fin }}</div>
+		<div class="form_dur">{{ strftime("%B de %Y", strtotime($fa->ano_ini)) }} a {{ strftime("%B de %Y", strtotime($fa->ano_fin)) }}</div>
 		<div class="fa">
 			{{ $fa->nivel }}<br>
 			@if (!empty($fa->especialidad))
@@ -87,11 +89,14 @@
 	<div class="experiencia">
 		<div class="ep">
 			
-			<div class="duracion"><span class="icon_empleo"></span>{{ $ep->inicio_lab }} - {{ $ep->fin_lab }}</div>
+			<div class="duracion"><span class="icon_empleo"></span>{{ strftime("%B de %Y", strtotime($ep->inicio_lab)) }} a {{ strftime("%B de %Y", strtotime($ep->fin_lab)) }}</div>
 			<div class="empresa"><span class="auxiliar">Puesto de </span><strong>{{ $ep->cargo }}</strong> <span class="auxiliar">en </span><br><i>{{ $ep->empresa }}</i></div>
 		</div>
 		<div class="funciones">
 			<span class="fun"><span class="label_funciones">Funciones: </span>{{ $ep->funciones }}</span><br>
+			@if ($ep->herramientas != null || $ep->herramientas!= '' || !empty($ep->herramientas))
+				<div class="herramientas"><span class="label_funciones">Herramientas utilizadas: </span>{{ $ep->herramientas }}</div>
+			@endif
 			<div class="logros"><strong>Logros:</strong> <span class="fun">{{ $ep->logros }}</span></div>
 		</div>
 	</div>
@@ -157,7 +162,7 @@
 @else
 	
 @endif
-
+</div>
 <!--------------------------------------Objetivo Profesional-------------------------------------------->
 @if(count($objProf) ==! 0)
 <div class="obj_prof">
@@ -174,11 +179,12 @@
 @else
 	
 @endif
+</div>
 <!--------------------------------------Password-------------------------------------------->
 <div class="web">
 	<p class="pass_datos">
 		<span class="titulo_nota">Nota:</span><br>
-		Para consultar <b>más detalles sobre mi historia profesional</b>, puedes ingresar al siguiente enlace y utilizar las credenciales de acceso que se muestran a continuación:
+		Para consultar <b>más detalles sobre mi historia profesional,</b> puedes ingresar al siguiente enlace y utilizar las credenciales de acceso que se muestran a continuación:
 		<div class="mas_info">
 			<a href="https://cvitae.solinfori.com/loginConsulta">cvitae.solinfori.com/loginConsulta</a><br>
 			Usuario: <b>{{ $userConsulta }}</b><br>
@@ -188,8 +194,8 @@
 </div>
 
 
-</div>
-</div>
+
+
 
 
 

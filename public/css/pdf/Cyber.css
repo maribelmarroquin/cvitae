@@ -103,6 +103,8 @@ header h3{
 }
 p.txt_datos>span>img{
     width: 0px;
+    visibility: hidden;
+    display: none;
 }
 .resumen{
     position: relative;
@@ -342,6 +344,7 @@ p.txt_datos>span>img{
 }
 .lis_o{
     font-size: 10pt;
+    list-style: none;
     list-style-image: url(../../cyberView/check-2x.png);
 }
 .obj_prof{
@@ -351,4 +354,21 @@ p.txt_datos>span>img{
 }
 .obj_prof h4{
     color: #15297C;
+}
+
+.web{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border-top: 3px  solid #8e4e06;
+    border-right: 3px  solid #8e4e06;
+    border-bottom: 2px  solid #3378AD;
+    border-left: 2px  solid #3378AD;
+    font-size: 10pt;
+    padding :10px;
+}
+.titulo_nota{
+    text-transform: uppercase;
+
+}
+.mas_info{
+    text-align: center;
 }

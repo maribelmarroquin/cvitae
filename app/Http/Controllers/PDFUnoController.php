@@ -57,6 +57,7 @@ class PDFUnoController extends Controller
             ->select('*')
             ->where('fk_user_ii', '=', $id_user )
             ->where('principal', '=', 'OK' )
+            ->orderByRaw('clasificacion asc')
             ->get();
 
         $expProf= \DB::table('exp_profs')
@@ -151,6 +152,7 @@ class PDFUnoController extends Controller
             ->select('*')
             ->where('fk_user_ii', '=', $id_user )
             ->where('principal', '=', 'OK' )
+            ->orderByRaw('clasificacion asc')
             ->get();
 
         $expProf= \DB::table('exp_profs')

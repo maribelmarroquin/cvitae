@@ -13,7 +13,9 @@
 				<h4 align="center">{{ $ep->empresa }}</h4>
 				<h6>Cargo: <b>{{ $ep->cargo }}</b></h6>
 				<h6>Funciones: <br><b>{{ $ep->funciones }}</b></h6>
-				<h6>Herramientas utilizadas: <br><b>{{ $ep->herramientas }}</b></h6>
+				@if(!empty($ep->herramientas))
+					<h6>Herramientas utilizadas: <b>{{ $ep->herramientas }}</b></h6>
+				@endif
 				@if(!empty($ep->jefe))
 					<h6>Cargo: <b>{{ $ep->jefe }}</b></h6>
 				@endif
