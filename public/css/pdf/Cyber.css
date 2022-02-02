@@ -367,6 +367,8 @@ p.txt_datos>span>img{
 }
 .titulo_nota{
     text-transform: uppercase;
+    font-weight: bold;
+    color: #15297C;
 
 }
 .mas_info{
