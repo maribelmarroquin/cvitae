@@ -1,7 +1,7 @@
 
 <html>
 <head>
-	
+
   <link rel="stylesheet" type="text/css" href={{$design}}>
   <?php setlocale(LC_TIME, "Spanish") ?>
 </head>
@@ -23,7 +23,7 @@
   </header>
 
   @if($dp->ruta ==! "")
-  <img src="storage/{{$name_user}}/id/{{$dp->ruta}}" class="img_id" />
+  <img src="{{asset("storage/$name_user/id/$dp->ruta")}}" class="img_id" />
   {{--<img class="img_id" src="id/{{ $dp->ruta }}">--}}
   @else
   <h5 class="sin_foto">Ingrese una fotografía en el sistema.</h5>
@@ -37,9 +37,9 @@
 		<span class="edad"><img src="open-iconic/png/eye.png"></span> Edad: <br><b>{{ \Carbon\Carbon::parse($dp->fecha_nac)->age }} años</b> <br><br>
 		<span class="telefono"><img src="open-iconic/png/eye.png"></span> Teléfono/celular: <br> <b>{{ $dp->telefono }}</b>  <br><br>
 		<span class="email"><img src="open-iconic/png/eye.png"></span> E-mail: <br><b>{{ $dp->email_u }}</b> <br><br>
-	 
+
 @if($dp->sitio ==! "")
-		<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"></span> Sitio web: <br><b>{{ $dp->sitio }}<br></b> 
+		<span class="sitio"><img id="pin" src="open-iconic/png/eye.png"></span> Sitio web: <br><b>{{ $dp->sitio }}<br></b>
 @endif
 	</p>
 	<div class="border_bottom"> </div>
@@ -59,14 +59,20 @@
 </header>
 @endif
 
-<div class="grid1">	
+<div class="grid1">
 <!--------------------------------------Formación ACADÉMICA-------------------------------------------->
 @if(count($formAca) ==! 0)
 <div class="form_aca">
 	<h4>Formación Académica</h4>
 	@foreach ($formAca as $fa)
 	<div class="form">
-		<div class="form_dur">{{ strftime("%B de %Y", strtotime($fa->ano_ini)) }} a {{ strftime("%B de %Y", strtotime($fa->ano_fin)) }}</div>
+
+		<div class="form_dur">{{ strftime("%B de %Y", strtotime($fa->ano_ini)) }} a
+            @if(!empty($fa->ano_fin))
+                {{ strftime("%B de %Y", strtotime($fa->ano_fin)) }}</div>
+            @else
+                Cursando Actualmente</div>
+            @endif
 		<div class="fa">
 			{{ $fa->nivel }}<br>
 			@if (!empty($fa->especialidad))
@@ -80,7 +86,7 @@
 </div>
 
 @else
-	<h5 class="form_aca">Falta por registrar su información académica.</h5>
+	<h5 class="form_aca">Faltaregistrar su información académica.</h5>
 @endif
 
 <!--------------------------------------Experiencia Profesional-------------------------------------------->
@@ -90,8 +96,13 @@
 	@foreach ($expProf as $ep)
 	<div class="experiencia">
 		<div class="ep">
-			
-			<div class="duracion"><span class="icon_empleo"></span>{{ strftime("%B de %Y", strtotime($ep->inicio_lab)) }} a {{ strftime("%B de %Y", strtotime($ep->fin_lab)) }}</div>
+
+			<div class="duracion"><span class="icon_empleo"></span>{{ strftime("%B de %Y", strtotime($ep->inicio_lab)) }}
+                @if(!empty($ep->fin_lab))
+                    a {{ strftime("%B de %Y", strtotime($ep->fin_lab)) }}</div>
+                @else
+                   - Laborando Actualmente</div>
+                @endif
 			<div class="empresa"><span class="auxiliar">Puesto de</span><strong>{{ $ep->cargo }}</strong><span class="auxiliar">en: </span><br><i>{{ $ep->empresa }}</i></div>
 		</div>
 		<div class="funciones">
@@ -125,7 +136,7 @@
 		@endforeach
 </div>
 @else
-	
+
 @endif
 
 <div class="form_otro">
@@ -145,7 +156,7 @@
 			@endforeach
 	</div>
 	@else
-		
+
 	@endif
 
 	<!--------------------------------------Otros datos-------------------------------------------->
@@ -162,7 +173,7 @@
 		</ul>
 	</div>
 	@else
-		
+
 	@endif
 
 </div>
@@ -181,7 +192,7 @@
 	</div>
 </div>
 @else
-	
+
 @endif
 
 </div>

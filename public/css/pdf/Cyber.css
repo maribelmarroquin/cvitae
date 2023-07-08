@@ -72,7 +72,7 @@ header h3{
 .img_id{
     width: 200px;
     position: relative;
-    margin-top: 35px;
+    margin-top: 15px;
     margin-left: 16px;
     background-color: #E6EFF3;
     border-radius: 5px;
@@ -83,7 +83,7 @@ header h3{
     text-align: left;
     font-size: 9pt;
     color:  #E6EFF3;
-    padding: 0px 5px 5px 5px;
+    padding: 25px 5px 5px 5px;
     margin-top: -20px;
 }
 .txt_datos b{
@@ -138,7 +138,7 @@ p.txt_datos>span>img{
     position: relative;
     left: 30%;
     top: 0px;
-    padding: 10px;
+    padding: 10px 10px 40px 10px;
 }
 
 .form_aca{
@@ -146,7 +146,7 @@ p.txt_datos>span>img{
     margin-top: -16px;
 }
 .form_aca h4::before{
-    content: url(../../cyberView/book-2x.png); 
+    content: url(../../cyberView/book-2x.png);
     margin-right: 10px;
 }
 .form_aca h4{
@@ -240,7 +240,7 @@ p.txt_datos>span>img{
 
 /*
 ---------------------------------------------------------
-   Sección de Conocimientos, formación extracadémica y 
+   Sección de Conocimientos, formación extracadémica y
    datos adicionales
 ---------------------------------------------------------
 */
@@ -348,7 +348,8 @@ p.txt_datos>span>img{
     list-style-image: url(../../cyberView/check-2x.png);
 }
 .obj_prof{
-    width: 100%;
+    width: 70%;
+    margin-left: 30%;
     display: inline-block;
     font-size: 11pt;
 }

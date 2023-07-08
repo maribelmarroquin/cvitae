@@ -6,7 +6,7 @@
 	{!! Form::model($dp, ['route' => ['datPer.update', $dp->id_datos_per], 'method' => 'PUT', 'files' => true]) !!}
 	<tr>
 		<th>{!!Form::label('img', 'Foto de Identidad Registrada:')!!}</th>
-		<td align="center"><img src="{{asset("storage/$name_user/id/$dp->ruta")}}" class="id_img" /></td>
+		<td align="center"><img src="{{ url("storage/$name_user/id/$dp->ruta") }}" class="id_img" /></td>
 	</tr>
 	<tr>
 		<td></td>

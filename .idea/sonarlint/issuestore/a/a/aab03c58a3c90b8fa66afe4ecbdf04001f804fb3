@@ -1,0 +1,18 @@
+
+cWeb:DoctypePresenceCheck":Insert a <!DOCTYPE> declaration to before this <html> tag.(œ÷Ãûÿÿÿÿ
+Z	Web:S5254"@Add "lang" and/or "xml:lang" attributes to this "<html>" element(œ÷Ãûÿÿÿÿ
+CWeb:PageWithoutTitleCheck"Add a <title> tag to this page.(Õ¶¯M
+FWeb:ImgWithoutAltCheck"%Add an "alt" attribute to this image.(Š¾ôx
+GWeb:ImgWithoutAltCheck"%Add an "alt" attribute to this image.(¬¡«³
+GWeb:BoldAndItalicTagsCheck#"!Replace this <b> tag by <strong>.(À·Ÿí
+LWeb:ImgWithoutAltCheck%"%Add an "alt" attribute to this image.(’°÷úÿÿÿÿ
+LWeb:BoldAndItalicTagsCheck%"!Replace this <b> tag by <strong>.(’°÷úÿÿÿÿ
+LWeb:ImgWithoutAltCheck&"%Add an "alt" attribute to this image.(Ñ§ïŠøÿÿÿÿ
+LWeb:BoldAndItalicTagsCheck&"!Replace this <b> tag by <strong>.(Ñ§ïŠøÿÿÿÿ
+GWeb:ImgWithoutAltCheck'"%Add an "alt" attribute to this image.(ÑÀü¸
+GWeb:BoldAndItalicTagsCheck'"!Replace this <b> tag by <strong>.(ÑÀü¸
+LWeb:ImgWithoutAltCheck*"%Add an "alt" attribute to this image.(”•íøÿÿÿÿ
+LWeb:BoldAndItalicTagsCheck*"!Replace this <b> tag by <strong>.(”•íøÿÿÿÿ
+CWeb:BoldAndItalicTagsCheckj"Replace this <i> tag by <em>.(›ÆÇ²
+MWeb:BoldAndItalicTagsCheck–"!Replace this <b> tag by <strong>.(Şïú’üÿÿÿÿ
+MWeb:BoldAndItalicTagsCheck˜"!Replace this <b> tag by <strong>.(àáçŠıÿÿÿÿ
