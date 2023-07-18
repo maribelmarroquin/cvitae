@@ -102,7 +102,7 @@
                                 <label for="principal">¿Mostrar en PDF?</label>
                             </th>
                             <td>
-                                <input type="checkbox" name="principal" value="yes" class="form-control border-secondary rounded" maxlength="3" {{ $fa->principal == 'yes' ? 'checked' : '' }}>
+                                <input type="checkbox" name="principal" value="yes" class="form-control border-secondary rounded" maxlength="3" value="yes" @if ($fa->principal === "OK") checked @endif>
                             </td>
                         </tr>
                         <tr>
@@ -110,7 +110,7 @@
                                 <label for="principal_vista">¿Mostrar en consulta web?</label>
                             </th>
                             <td>
-                                <input type="checkbox" name="principal_vista" value="yes" class="form-control border-secondary rounded" maxlength="3" {{ $fa->principal_vista == 'yes' ? 'checked' : '' }}>
+                                <input type="checkbox" name="principal_vista" value="yes" class="form-control border-secondary rounded" maxlength="3" value="yes" @if ($fa->principal_vista === "OK") checked @endif>
                             </td>
                         </tr>
                         <tr>
