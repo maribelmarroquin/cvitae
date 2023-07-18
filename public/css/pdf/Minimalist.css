@@ -1,0 +1,447 @@
+/**
+*   MINIMALIST
+*   Paleta de colores:
+*
+*   #18121E
+*   #233237
+*   #984B43
+*   #EAC67A
+*
+**/
+
+body{
+      font-family: sans-serif;
+      margin:0px;
+      margin:0px;
+}
+@page {
+  size: letter;
+  margin: 0px;
+}
+header {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 240px;
+  /*background-color: #233237;*/
+  color:  #18121E;
+  padding: 15px;
+}
+/**/
+.txt_header{
+  margin: 10px;
+  text-align: center;
+}
+/**/
+.img_id{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 200px;
+  border-radius:10px 10px 10px 10px;
+}
+.sin_foto{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 200px;
+  background: #9FC9DA;
+  border-radius:10px 10px 10px 10px;
+}
+/* ----------------- Datos personales ------------------- */
+
+.datos{
+  position: relative;
+  text-align: left;
+  margin: 0px 20px 20px 0px;
+  left: 220px;
+  padding: 1px 10px 1px 20px;
+  color: #2A3132;
+}
+.domicilio{
+  background-color: #984B43;
+  padding: 10px;
+  width: 70%;
+  text-align: center;
+  border-radius:20px 20px 20px 20px;
+  font-size: 10pt;
+  color: white;
+}
+.domicilio br{
+  display: none;
+}
+.txt_datos{
+  font-size: 11pt;
+  text-align: center;
+  margin-left: -200px;
+  overflow-wrap: break-word;
+}
+.edad br{
+  display: none;
+}
+.telefono br{
+  display: none;
+}
+.telefono b>br{
+  display: block;
+}
+.email br{
+  display: none;
+}
+.sitio br{
+  display: block;
+}
+.border_bottom{
+  background-color: #18121E;
+  height: 5px;
+  border-radius: 2.5px;
+  width: auto;
+}
+/* -           Resumen Profesional           - */
+.resumen{
+  position: relative;
+  text-align: justify;
+  margin: -25px 20px 20px 20px;
+  font-size: 14px;
+  color: #2A3132;
+  border-radius: 10px;
+}
+.resumen h4{
+  background-color: #EAC67A;
+  color: #18121E;
+  padding: 5px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.resumen p{
+  padding: 0px 20px 0px 20px;
+  margin-top: -10px;
+}
+/*                          ---   Sección grid   ---                       */
+.grid1{
+  position: relative;
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  /*border-top: 5px solid #18121E;*/
+}
+.grid1 > div {
+  padding: 1px 15px 0px 15px;
+  height: auto;
+}
+.grid2{
+  /*page-break-before: always;*/
+  width: 100%;
+  margin: 20px;
+  clear: left;
+  margin: 20px 20px 20px 0px;
+  float: left;
+}
+.grid2 > div {
+  padding: 1px 20px 0px 20px;
+  height: auto;
+}
+.form_otro{
+  float: left;
+  width: 62%;
+  margin-bottom: 20px;
+}
+/* -           Formación académica           - */
+div .form_aca{
+  color: #2A3132;
+  width: 27%;
+  float: left;
+  text-align: center;
+}
+.form_dur{
+  background-color: #EAC67A;
+  text-transform: uppercase;
+  padding: 5px;
+  margin: 10px 0px 10px 0px;
+  border-radius: 0px 0px 10px 10px;
+  color: #18121E;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+}
+.especialidad{
+  font-size: 15px;
+}
+.doc_form{
+  background-color: #233237;
+  border-radius: 10px 10px 0px 0px;
+  color: #FFFFFF;
+  font-size: 13px;
+  padding: 5px;
+  margin-top: 10px;
+}
+.fa{
+  padding-bottom: 5px;
+  font-size: 13px;
+}
+.form_aca h4{
+  padding: 10px;
+  margin: -5px 0px 0px 0px;
+  background-color: #984B43;
+  /*border: 3px solid #18121E;*/
+  border-radius: 0px 0px 10px 10px;
+  color: #18121E;
+  text-transform: uppercase;
+  text-align: center;
+}
+.fa p{
+  font-size: 12px;
+}
+/*------------Experiencia profesional----------------*/
+
+div .exp_prof{
+  border-radius: 10px 10px 10px 10px;
+  float: left;
+  width: 60%;
+  margin-left: 20px;
+  padding-bottom: 10px;
+ }
+ .exp_prof h4{
+  padding: 10px;
+  margin: -5px 0px 0px 0px;
+  background-color: #233237;
+  /*border: 3px solid #18121E;*/
+  color: #18121E;
+  border-radius: 0px 0px 10px 10px;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+ }
+.ep{
+  text-align: justify;
+  font-size: 13px;
+  margin-top: 10px;
+ }
+ .empresa br{
+   display: none;
+ }
+ .funciones{
+  text-align: justify;
+  font-size: 13px;
+ }
+ .funciones br{
+  display: none;
+ }
+ .funciones_des{
+  border: 2px solid #984B43;
+  border-bottom-style: none;
+  border-top-style: none;
+ }
+ .experiencia{
+  padding: 10px 10px 0px 10px;
+ }
+ .label_funciones{
+   display: none;
+ }
+ .fun{
+  color: #2A3132;
+ }
+ .duracion{
+  border: 2px dotted #18121E;
+  border-bottom-style: none;
+  color: #18121E;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+ }
+ .empresa{
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 0px;
+  padding: 5px;
+  color: white;
+  background-color: #984B43;
+ }
+ .funciones .fun p{
+  margin: 10px;
+ }
+ .logros{
+  background-color: #EAC67A;
+  color: #18121E;
+  padding: 5px 15px 5px 15px;
+  border-radius: 0px 0px 10px 10px;
+  margin-top: 0px;
+ }
+ .logros .fun{
+  color: #18121E;
+ }
+ .herramientas{
+
+  border: 2px solid #EAC67A;
+  border-bottom-style: none;
+  border-top-style: none;
+  padding: 0px 10px 10px 10px;
+  color: #233237;
+ }
+ .herramientas .label_funciones{
+  display: block;
+  color: #233237;
+  font-weight: bold;
+ }
+/*----------------Segunda Sección-------------- */
+ .grid2{
+    page-break-before:always;
+    margin: 0px;
+  }
+
+/* -        Formación extra-académica        - */
+.form_exaca{
+  position: relative;
+  clear: left;
+  left: 55.5%;
+  margin-top: -1px;
+  margin-left: -9px;
+  margin-right: -10px;
+  /*border-top: 5px solid #336B87;*/
+ }
+ .form_exaca h4{
+  background-color: #984B43;
+  color: #ffffff;
+  padding: 10px;
+  margin: 0px 20px 10px 20px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  border-radius: 0px 0px 10px 10px;
+ }
+ .fe{
+  text-align: justify;
+  width: 80%;
+  margin-left: 10%;
+}
+.fe p{
+  font-size: 13px;
+  color: #2A3132;
+}
+.fe_des{
+  background-color: #EAC67A;
+  padding: 5px;
+  margin: -10px 0px -10px 0px;
+  font-size: 13px;
+  border-radius: 0px 0px 5px 5px;
+}
+.fe_div{
+  height: 2px;
+  background-color: #233237; 
+  margin: -10px 0px -20px 10%;
+  width: 80%;
+}
+
+/* -        Idiomas e informática (Conocimientos)        - */
+div .idio_info{
+  padding: 0px 20px 20px 20px;
+  width: 28%;
+  /*float: left;*/
+  position: absolute;
+  left: 10px;
+  /*page-break-before: always;*/
+}
+.idio_info h4{
+  padding: 10px;
+  margin: 0px 20px 10px 20px;
+  color: #18121E;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #EAC67A;
+  border-radius: 0px 0px 10px 10px;
+}
+.ii{
+  font-size: 10pt;
+  padding-bottom: 5px;
+  color: #2A3132;
+}
+.ii_bar{
+  /*background-color: #90AFC5; */
+  border-radius: 7px;
+  border: 1px dotted #18121E;
+}
+.ii_percent{
+  padding:2px 2px 2px 10px; 
+  border-radius: 7px; 
+  background-color:#233237; 
+  color: #ffffff; 
+}
+/* ------------------------- Otros Datos ------------------------------*/
+div .otros{
+  border-radius:0px 0px 10px 10px;
+  color: #fff;
+  border: solid 2px #2A3132;
+  margin-top: 40px;
+  position: relative;
+  clear: left;
+  left: 55.5%;
+}
+.o{
+  font-size: 14px;
+}
+.otros h4{
+  padding: 10px 0px 10px 0px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #2A3132;
+  margin-top: 0px;
+}
+.lis_o{
+    list-style-type: circle;
+    color: #2A3132;
+ }
+ .lis_o li{
+    padding-bottom: 10px;
+ }
+ .obj_prof{
+   display: none;
+ }
+ .web{
+  text-align: left;
+  margin: 20px 20px 20px 0px;
+  background-color: #EAC67A;
+  color: #233237;
+  /*width: 270px;*/
+  width: 60%;
+  border-radius: 20px 0px 0px 20px;
+  font-size: 8pt;
+  position: relative;
+  clear: left;
+  left: 40%;
+}
+.titulo_nota{
+  font-size: 12pt;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.mas_info{
+  font-size: 14px;
+  margin-left: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+.mas_info a{
+  color: white;
+  font-size: 20px;
+  padding-top: -20px;
+  font-weight: bolder;
+}
+.pass_datos{
+  padding: 20px;
+  font-size: 14px;
+}
+.pass_datos a{
+  color: #233237;
+}
+footer .page:after {
+  content: counter(page);
+}
+footer table {
+  width: 100%;
+}
+footer p {
+  text-align: right;
+}
+footer .izq {
+  text-align: left;
+}

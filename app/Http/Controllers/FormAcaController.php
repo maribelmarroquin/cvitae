@@ -46,7 +46,7 @@ class FormAcaController extends Controller
         }
         
 
-        \App\FormAca::create([
+        \App\Models\FormAca::create([
             'nivel' => $request['nivel'],
             'especialidad' => $request['especialidad'],
             'instituto' => $request['instituto'],
@@ -106,7 +106,7 @@ class FormAcaController extends Controller
     public function update(FormAcaRequest $request, $id)
     {
         $tabName='form_aca';
-        $act_formAca = \App\FormAca::find($id);
+        $act_formAca = \App\Models\FormAca::find($id);
         $act_formAca->nivel = $request->nivel;
         $act_formAca->especialidad = $request->especialidad;
         $act_formAca->instituto = $request->instituto;
@@ -132,7 +132,7 @@ class FormAcaController extends Controller
     public function destroy($id)
     {
         $tabName = 'form_aca';
-        \App\FormAca::destroy($id);
+        \App\Models\FormAca::destroy($id);
         Session::flash('message-error', 'Datos Académicos eliminados.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

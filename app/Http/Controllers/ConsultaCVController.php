@@ -54,7 +54,7 @@ class ConsultaCVController extends Controller
 
             if($conteoActual <= 4 ){
 
-                $consulta = \App\ConsultaCV::find($id_consulta);
+                $consulta = \App\Models\ConsultaCV::find($id_consulta);
                 $consulta->cont = $conteoActual;
                 $consulta->save();
 
@@ -88,12 +88,20 @@ class ConsultaCVController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteOne($id)
     {
-        \App\ConsultaCV::destroy($id);
+        \App\Models\ConsultaCV::destroy($id);
         Session::flash('message-correct', 'Usuario de "consulta" eliminado correctamente.');
         $tabName = 'consulta';
         /*return redirect::to('principal/#consulta');*/
+        return redirect::to('principal')->withInput(['tab'=> $tabName]);
+    }
+
+    public function deleteAll(Request $request){
+        $id_consulta = $request->input('grupoConsulta'); // Obtiene el array de IDs desde el formulario
+        \App\Models\ConsultaCV::whereIn('id_consulta', $id_consulta)->delete(); // Elimina los registros cuyos IDs están en el array
+        Session::flash('message-correct', 'Lista de Usuarios de consulta eliminados correctamente.');
+        $tabName = 'consulta';
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
 

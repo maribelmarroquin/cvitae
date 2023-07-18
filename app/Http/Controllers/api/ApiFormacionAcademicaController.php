@@ -32,7 +32,7 @@ class ApiFormacionAcademicaController extends Controller
         }
         
 
-        \App\FormAca::create([
+        \App\Models\FormAca::create([
             'nivel' => $request['nivel'],
             'especialidad' => $request['especialidad'],
             'instituto' => $request['instituto'],

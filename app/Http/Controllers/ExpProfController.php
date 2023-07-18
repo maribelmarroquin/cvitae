@@ -44,7 +44,7 @@ class ExpProfController extends Controller
             $last_order = $last_order+1;
         }
 
-        \App\ExpProf::create([
+        \App\Models\ExpProf::create([
             'empresa' => $request['empresa'],
             'cargo' => $request['cargo'],
             'funciones' => $request['funciones'],
@@ -78,7 +78,7 @@ class ExpProfController extends Controller
         $tabName = 'exp_prof';
         $principal = $request['principal'];
         
-        $act_expProf = \App\ExpProf::find($id);
+        $act_expProf = \App\Models\ExpProf::find($id);
         $act_expProf->empresa = $request->empresa;
         $act_expProf->cargo = $request->cargo;
         $act_expProf->funciones = $request->funciones;
@@ -107,7 +107,7 @@ class ExpProfController extends Controller
     public function destroy($id)
     {
         $tabName = 'exp_prof';
-        \App\ExpProf::destroy($id);
+        \App\Models\ExpProf::destroy($id);
         Session::flash('message-error', 'Experiencia Profesional eliminada correctamente.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

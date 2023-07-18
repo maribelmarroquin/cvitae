@@ -1,68 +1,89 @@
 <!-- Modal -->
-<div class="modal fade" id="idi_inModal{{$ii->id_idinfo}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	  	<div class="modal-content">
-			<div class="modal-header">
-		  		<h5 class="modal-title" id="exampleModalLongTitle">
-					Editar conocimiento en {{ $ii->idi_info }}.
-				</h5>
-		  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-		  
-				<table>
-					{!! Form::model($ii, ['route' => ['idioInfo.update', $ii->id_idinfo], 'method' => 'PUT']) !!}
-					<tr>
-						<th>{!!Form::label('idi_info', '*Conocimiento:')!!}</th>
-						<td>{!!Form::text('idi_info', null, array('class'=>'form-control border-secondary', 'required', 'maxlength'=>'100'))!!}</td>
-					</tr>
-					<tr>
-						<th>{!!Form::label('nivel', '*Nivel:', array('for'=>"validationDefaultNivel"))!!}</th>
-						<td>
-							<div class="input-group">	
-								{!!Form::number('nivel', substr($ii->nivel, 0, -1), array('class'=>'form-control border-secondary ', 'required', 'max'=>'100', 'min'=>'1', 'aria-describedby'=>"inputGroupPrepend2", 'id'=>"validationDefaultNivel"))!!}
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="inputGroupPrepend2">%</span>
-								</div>
-							</div>
-						</td>
-					</tr>
-					<th>{!!Form::label('clasificacion', '*Clasificación:')!!}</th>
-					<td>
-
-						<select name="clasificacion" class="custom-select form-control border-secondary" id="inputGroupSelect04">
-							<option selected value="{{$ii->id_clas_conocimientos}}">{{$ii->clasificacion}}</option>
-							@foreach ($clas_ii as $ci)
-							<option value="{{$ci->id_clas_conocimientos}}">{{$ci->clasificacion}}</option>
-							@endforeach
-						</select>
-			
-					</td>
-					<tr>
-						<th>{!!Form::label('principal', '¿Mostrar en PDF?')!!}</th>
-						<td>{!!Form::checkbox('principal', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
-					</tr>
-					<tr>
-						<th>{!!Form::label('principal_vista', '¿Mostrar en consulta web?')!!}</th>
-						<td>{!!Form::checkbox('principal_vista', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
-					</tr>
-					<tr>
-						<td>* Campos Obligatorios</td>
-						<td></td>
-					</tr>
-					
-				</table>
-
-			</div>
-			<div class="modal-footer">
-				<a href="/principal?tab=idi_in" class="btn btn-secondary">Cancelar Edición</a>
-				{!! Form::submit('Guardar', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;')) !!}
-			</div>
-			{!!Form::close()!!}
-	 	</div>
-	</div>
+<div class="modal fade" id="idi_inModal{{ $ii->id_idinfo }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @foreach ($idioInfo as $iie)
+            @endforeach
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    Editar conocimiento en {{ $iie->idi_info }}.
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <form method="POST" action="{{ route('idioInfo.update', $iie->id_idinfo) }}">
+                        @csrf
+                        @method('PUT')
+                        <tr>
+                            <th>
+                                <label for="idi_info">*Conocimiento:</label>
+                            </th>
+                            <td>
+                                <input type="text" name="idi_info" class="form-control border-secondary" required maxlength="100" value="{{ $iie->idi_info }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="nivel">*Nivel:</label>
+                            </th>
+                            <td>
+                                <div class="input-group">
+                                    <input type="number" name="nivel" class="form-control border-secondary" max="100" min="1" required value="{{ substr($iie->nivel, 0, -1) }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="clasificacion">*Clasificación:</label>
+                            </th>
+                            <td>
+                                <select name="clasificacion" class="custom-select form-control border-secondary">
+                                    <option selected value="{{ $iie->id_clas_conocimientos }}">{{ $iie->clasificacion }}</option>
+                                    @foreach ($clas_ii as $ci)
+                                    <option value="{{ $ci->id_clas_conocimientos }}">{{ $ci->clasificacion }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="principal">¿Mostrar en PDF?</label>
+                            </th>
+                            <td>
+                                <input type="checkbox" name="principal" class="form-control border-secondary" @if ($iie->principal) checked @endif>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="principal_vista">¿Mostrar en consulta web?</label>
+                            </th>
+                            <td>
+                                <input type="checkbox" name="principal_vista" class="form-control border-secondary" @if ($iie->principal_vista) checked @endif>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>* Campos Obligatorios</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button type="submit" class="btn" style="background:#006699; color:#ffffff;">Guardar</button>
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="/principal?tab=idi_in" class="btn btn-secondary">Cancelar Edición</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 {{--
@@ -72,45 +93,71 @@
 
 @section('contenido')
 
-
 @foreach ($idioInfoE as $iie)
-
 @endforeach
 <h3>Editar conocimiento en {{ $iie->idi_info }}.</h3>
 <table>
-	{!! Form::model($iie, ['route' => ['idioInfo.update', $iie->id_idinfo], 'method' => 'PUT']) !!}
-	<tr>
-		<th>{!!Form::label('idi_info', '*Conocimiento:')!!}</th>
-		<td>{!!Form::text('idi_info', null, array('class'=>'form-control border-secondary', 'required', 'maxlength'=>'100'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('nivel', '*Nivel:', array('for'=>"validationDefaultNivel"))!!}</th>
-		<td>
-			<div class="input-group">	
-				{!!Form::number('nivel', null, array('class'=>'form-control border-secondary ', 'required', 'max'=>'100', 'min'=>'1', 'aria-describedby'=>"inputGroupPrepend2", 'id'=>"validationDefaultNivel"))!!}
-				<div class="input-group-prepend">
-					<span class="input-group-text" id="inputGroupPrepend2">%</span>
-				</div>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('clasificacion', '*Clasificación:')!!}</th>
-		<td>{!!Form::text('clasificacion', null, array('class'=>'form-control border-secondary', 'required', 'maxlength'=>'10'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal', '¿Mostrar en PDF?')!!}</th>
-		<td>{!!Form::checkbox('principal', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal_vista', '¿Mostrar en consulta web?')!!}</th>
-		<td>{!!Form::checkbox('principal_vista', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
-	</tr>
-	<tr>
-		<<td>* Campos Obligatorios</td>
-		<td>{!! Form::submit('Guardar', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;')) !!}</td>
-	</tr>
-	{!!Form::close()!!}
+    <form method="POST" action="{{ route('idioInfo.update', $iie->id_idinfo) }}">
+        @csrf
+        @method('PUT')
+        <tr>
+            <th>
+                <label for="idi_info">*Conocimiento:</label>
+            </th>
+            <td>
+                <input type="text" name="idi_info" class="form-control border-secondary" required maxlength="100" value="{{ $iie->idi_info }}">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="nivel">*Nivel:</label>
+            </th>
+            <td>
+                <div class="input-group">
+                    <input type="number" name="nivel" class="form-control border-secondary" max="100" min="1" required value="{{ substr($iie->nivel, 0, -1) }}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="clasificacion">*Clasificación:</label>
+            </th>
+            <td>
+                <select name="clasificacion" class="custom-select form-control border-secondary">
+                    <option selected value="{{ $iie->id_clas_conocimientos }}">{{ $iie->clasificacion }}</option>
+                    @foreach ($clas_ii as $ci)
+                    <option value="{{ $ci->id_clas_conocimientos }}">{{ $ci->clasificacion }}</option>
+                    @endforeach
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="principal">¿Mostrar en PDF?</label>
+            </th>
+            <td>
+                <input type="checkbox" name="principal" class="form-control border-secondary" @if ($iie->principal) checked @endif>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="principal_vista">¿Mostrar en consulta web?</label>
+            </th>
+            <td>
+                <input type="checkbox" name="principal_vista" class="form-control border-secondary" @if ($iie->principal_vista) checked @endif>
+            </td>
+        </tr>
+        <tr>
+            <td>* Campos Obligatorios</td>
+            <td>
+                <button type="submit" class="btn" style="background:#006699; color:#ffffff;">Guardar</button>
+            </td>
+        </tr>
+    </form>
 </table>
 @endsection
+
 --}}

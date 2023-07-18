@@ -1,22 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
-*/
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
+
 */
 
-//Route::resource('/', 'IndexController');
+
 Route::resource('/', 'InicioController')->only(['index', 'store']);
 
 Route::get('/register/verify/{code}', 'VerifyEmailController@verify');
@@ -61,14 +59,15 @@ Route::post('pdf_cv/pdfpass', 'PDFUnoController@store')->name('pdf_cv.store');
 
 Route::resource('vista', 'DesignViewStayController')->only(['store', 'update']);
 
-Route::resource('loginConsulta', 'LoginConsultaController', ['only'=> 'index']);
+Route::resource('loginConsulta', 'LoginConsultaController')->only(['index']);
 Route::resource('consultacv', 'VistaCVController')->only(['index']);
-Route::resource('consulta', 'ConsultaCVController')->only(['index', 'store', 'destroy']);
+Route::resource('consulta', 'ConsultaCVController')->only(['index', 'store']);
+Route::get('consulta/deleteOne/{id}', 'ConsultaCVController@deleteOne');
+Route::post('consulta/deleteAll', 'ConsultaCVController@deleteAll')->name('consulta.deleteAll');
 Route::get('logoutCons', 'ConsultaCVController@logout');
 Route::resource('emailcv', 'EmailCVController')->only(['index', 'store']);
 Route::get('error', function(){
 	abort(404);
 });
-
 
 /*  */

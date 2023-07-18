@@ -1,66 +1,62 @@
 <h1>Conocimientos.</h1>
 
-@if(count($errors) > 0)
+@if($errors->any())
 	<div class="errors alert alert-danger alert-dismissible" role="alert">
 		<h5>Valide lo siguiente:</h5>
 		<ul>
-		@foreach($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
+			@foreach($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
 		</ul>
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
-		  </button>
+		</button>
 	</div>
 @endif
 
-
 <table>
-	{!!Form::open(array(
-		'method'=>'POST',
-		'route'=>'idioInfo.store'))!!}
+	<form method="POST" action="{{ route('idioInfo.store') }}">
+		@csrf
 	
-	<tr>
-		<th>{!!Form::label('idi_info', '*Conocimiento:')!!}</th>
-		<td>{!!Form::text('idi_info', null, array('class'=>'form-control border-secondary', 'required', 'maxlength'=>'100'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('nivel', '*Nivel:', array('for'=>"validationDefaultNivel"))!!}</th>
-		<td>
-			<div class="input-group">	
-				{!!Form::number('nivel', null, array('class'=>'form-control border-secondary ', 'required', 'max'=>'100', 'min'=>'1', 'aria-describedby'=>"inputGroupPrepend2", 'id'=>"validationDefaultNivel"))!!}
-				<div class="input-group-prepend">
-					<span class="input-group-text" id="inputGroupPrepend2">%</span>
+		<tr>
+			<th><label for="idi_info">*Conocimiento:</label></th>
+			<td><input type="text" name="idi_info" class="form-control border-secondary" required maxlength="100"></td>
+		</tr>
+		<tr>
+			<th><label for="nivel">*Nivel:</label></th>
+			<td>
+				<div class="input-group">	
+					<input type="number" name="nivel" class="form-control border-secondary" required max="100" min="1" aria-describedby="inputGroupPrepend2" id="validationDefaultNivel">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroupPrepend2">%</span>
+					</div>
 				</div>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('clasificacion', '*Clasificación:')!!}</th>
-		<td>
-
-			<select name="clasificacion" class="custom-select form-control border-secondary" id="inputGroupSelect04">
-				<option selected>Seleccionar opción</option>
-				@foreach ($clas_ii as $ci)
-				<option value="{{$ci->id_clas_conocimientos}}">{{$ci->clasificacion}}</option>
-				@endforeach
-			</select>
-
-		</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal', '¿Mostrar en PDF?')!!}</th>
-		<td>{!!Form::checkbox('principal', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal_vista', '¿Mostrar en consulta web?')!!}</th>
-		<td>{!!Form::checkbox('principal_vista', 'yes', true, array('class'=>'form-control border-secondary', 'maxlength'=>'3'))!!}</td>
-	</tr>
-	<tr>
-		<td>* Campos Obligatorios</td>
-		<td>{!! Form::submit('Guardar', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;')) !!} {!! Form::reset('Limpiar', array('class'=> 'btn btn-secondary')) !!}</td>
-	</tr>
-	{!!Form::close()!!}
+			</td>
+		</tr>
+		<tr>
+			<th><label for="clasificacion">*Clasificación:</label></th>
+			<td>
+				<select name="clasificacion" class="custom-select form-control border-secondary" id="inputGroupSelect04">
+					<option selected>Seleccionar opción</option>
+					@foreach ($clas_ii as $ci)
+						<option value="{{$ci->id_clas_conocimientos}}">{{$ci->clasificacion}}</option>
+					@endforeach
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="principal">¿Mostrar en PDF?</label></th>
+			<td><input type="checkbox" name="principal" value="yes" class="form-control border-secondary" maxlength="3" checked></td>
+		</tr>
+		<tr>
+			<th><label for="principal_vista">¿Mostrar en consulta web?</label></th>
+			<td><input type="checkbox" name="principal_vista" value="yes" class="form-control border-secondary" maxlength="3" checked></td>
+		</tr>
+		<tr>
+			<td>* Campos Obligatorios</td>
+			<td><button type="submit" class="btn" style="background:#006699; color:#ffffff;">Guardar</button> <button type="reset" class="btn btn-secondary">Limpiar</button></td>
+		</tr>
+	</form>
 	<tr>
 		<td>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#clas_idioInfo">
@@ -71,6 +67,6 @@
 	</tr>
 </table>
 <br><br>
-@if(count($idioInfo) ==! 0)
+@if(count($idioInfo) != 0)
 	@include('contCV.list_idioInfo')
 @endif

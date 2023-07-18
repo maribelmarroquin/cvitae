@@ -3,14 +3,14 @@
 @section('titulo', 'Bienvenid@')
 
 @section('contenido')
-<a href="#up" title="Ir arriba"><img class="ir-arriba" src="{{ asset('img/up.png') }}" /></a>
+<a id="ir-arriba" href="#up" title="Ir arriba"><img class="ir-arriba" src="{{ asset('img/up.png') }}" /></a>
 
 <div class='session' id="session">
   Usuario logueado: <b>{!! Auth::user('consulta_cv')->user_cons !!}</b><br>
   <a class="logout" href="logoutCons" >Cerrar Sesión</a>
 </div>
 <div class='session_button' id="session_button">
-<a title="Cerrar Sesión" class="logout" href="logoutCons" ><img src="elegance/power-standby_blanco-3x.png" ></a>
+	<a title="Cerrar Sesión" class="logout" href="logoutCons" ><img src="elegance/power-standby_blanco-3x.png" ></a>
 </div>
 
 	@foreach ($datosP as $dp)

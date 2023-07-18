@@ -1,129 +1,113 @@
-  <!-- Modal -->
-  <div class="modal fade" data-backdrop="static" data-keyboard="false" id="form_exacaModal{{$fe->id_form_exaca}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="exampleModalLongTitle">
-			Editar datos de {{ $fe->curso }} {{ $fe->desc }}.
-		  </h5>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="modal-body">
-		  
-			<table>
-				{!! Form::model($fe, ['route' => ['formExAca.update', $fe->id_form_exaca], 'method' => 'PUT', 'files' => true]) !!}
-				
-				<tr>
-					<th>{!!Form::label('curso', '*Curso, Taller o Seminario:')!!}</th>
-					<td>{!! Form::select('curso', ['Curso'=>'Curso', 'Conferencias'=>'Conferencias', 'Taller'=>'Taller', 'Seminario'=>'Seminario'], null, ['class' => 'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50']) !!}</td>
-				</tr>
-				<tr>
-					<th>{!!Form::label('desc', '*Descripción:')!!}</th>
-					<td>{!!Form::textarea('desc', null, array('size' => '50x4', 'class'=>'form-control border-secondary rounded', 'required', 'maxlength'=>'200'))!!}</td>
-				</tr>
-				<tr>
-					<th>{!!Form::label('instituto', '*Instituto:')!!}</th>
-					<td>{!!Form::text('instituto', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-				</tr>
-				<tr>
-					<th>{!!Form::label('duración', '*Duración:')!!}</th>
-					<td>{!!Form::text('duración', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-				</tr>
-				<tr>
-					<th>{!!Form::label('doc_ex', '*Documento Obtenido:')!!}</th>
-					<td>{!!Form::text('doc_ex', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-				</tr>
-				<tr>
-					<th>Imagen Actual del Documento:</th>
-					@if($fe->ruta_docex === null)
-					<td style="color:red;">Sin imagen registrada</td>
-					@else
-					<td>
-						<img class="id_img" src="{{asset("storage/$name_user/docs/$fe->ruta_docex")}}">
-						<a class="btn btn-danger" href="formExAca/{{$fe->id_form_exaca}}/edit">Eliminar Imagen</a>
-					</td>
-					@endif
-				</tr>
-				<tr>
-					<th>Imagen de Documento Obtenido:</th>
-					<td>{!!Form::file('ruta_docex', array('class'=>'form-control border-secondary rounded-pill', 'maxlength'=>'255'))!!}</td>
-				</tr>
-				<tr>
-					<th>{!!Form::label('principal', 'Mostrar en PDF:')!!}</th>
-					<td>{!!Form::checkbox('principal', 'yes', true, array('class'=>'form-control border-secondary rounded', 'maxlength'=>'3'))!!}</td>
-				</tr>
-				<tr>
-					<th>{!!Form::label('principal_vista', '¿Mostrar en consulta web?')!!}</th>
-					<td>{!!Form::checkbox('principal_vista', 'yes', true, array('class'=>'form-control border-secondary rounded', 'maxlength'=>'3'))!!}</td>
-				</tr>
-				<tr><td colspan="2">* Campos Obligatorios</td></tr>				
-			</table>
+<!-- Modal -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="form_exacaModal{{$fe->id_form_exaca}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    Editar datos de {{ $fe->curso }} {{ $fe->desc }}.
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-		</div>
-		<div class="modal-footer">
-			<a href="/principal?tab=form_exaca" class="btn btn-secondary">Cancelar Edición</a>
-		  {!! Form::submit('Guardar', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;')) !!}
-		</div>
-		{!!Form::close()!!}
-	  </div>
-	</div>
-  </div>
+                <form method="POST" action="{{ route('formExAca.update', $fe->id_form_exaca) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-{{--
-@extends('templates/edit')
+                    <table>
+                        <tr>
+                            <th>
+                                <label for="curso">*Curso, Taller o Seminario:</label>
+                            </th>
+                            <td>
+                                <select name="curso" class="form-control border-secondary rounded-pill" required maxlength="50">
+                                    <option value="Curso" {{ $fe->curso == 'Curso' ? 'selected' : '' }}>Curso</option>
+                                    <option value="Conferencias" {{ $fe->curso == 'Conferencias' ? 'selected' : '' }}>Conferencias</option>
+                                    <option value="Taller" {{ $fe->curso == 'Taller' ? 'selected' : '' }}>Taller</option>
+                                    <option value="Seminario" {{ $fe->curso == 'Seminario' ? 'selected' : '' }}>Seminario</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="desc">*Descripción:</label>
+                            </th>
+                            <td>
+                                <textarea name="desc" rows="4" class="form-control border-secondary rounded" required maxlength="200">{{ $fe->desc }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="instituto">*Instituto:</label>
+                            </th>
+                            <td>
+                                <input type="text" name="instituto" value="{{ $fe->instituto }}" class="form-control border-secondary rounded-pill" required maxlength="50">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="duración">*Duración:</label>
+                            </th>
+                            <td>
+                                <input type="text" name="duración" value="{{ $fe->duración }}" class="form-control border-secondary rounded-pill" required maxlength="50">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="doc_ex">*Documento Obtenido:</label>
+                            </th>
+                            <td>
+                                <input type="text" name="doc_ex" value="{{ $fe->doc_ex }}" class="form-control border-secondary rounded-pill" required maxlength="50">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Imagen Actual del Documento:</th>
+                            @if($fe->ruta_docex === null)
+                            <td style="color:red;">Sin imagen registrada</td>
+                            @else
+                            <td>
+                                <img class="id_img" src="{{asset("storage/$name_user/docs/$fe->ruta_docex")}}">
+                                <a class="btn btn-danger" href="formExAca/{{$fe->id_form_exaca}}/edit">Eliminar Imagen</a>
+                            </td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>Imagen de Documento Obtenido:</th>
+                            <td>
+                                <input type="file" name="ruta_docex" class="form-control border-secondary rounded-pill" maxlength="255">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="principal">Mostrar en PDF:</label>
+                            </th>
+                            <td>
+                                <input type="checkbox" name="principal" value="yes" class="form-control border-secondary rounded" maxlength="3" {{ $fe->principal == 'yes' ? 'checked' : '' }}>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="principal_vista">¿Mostrar en consulta web?</label>
+                            </th>
+                            <td>
+                                <input type="checkbox" name="principal_vista" value="yes" class="form-control border-secondary rounded" maxlength="3" {{ $fe->principal_vista == 'yes' ? 'checked' : '' }}>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">* Campos Obligatorios</td>
+                        </tr>
+                    </table>
 
-@section('titulo', 'Bienvenid@')
+                    <div class="modal-footer">
+                        <a href="/principal?tab=form_exaca" class="btn btn-secondary">Cancelar Edición</a>
+                        <button type="submit" class="btn" style="background:#006699; color:#ffffff;">Guardar</button>
+                    </div>
+                </form>
 
-@section('contenido')
+            </div>
+        </div>
+    </div>
+</div>
 
-
-@foreach ($formExAcaE as $feae)
-
-@endforeach
-<h3 align="center">Editar datos académicos del curso {{ $feae->curso }}</h3>
-<table>
-	{!! Form::model($feae, ['route' => ['formExAca.update', $feae->id_form_exaca], 'method' => 'PUT', 'files' => true]) !!}
-	
-	<tr>
-		<th>{!!Form::label('curso', 'Curso, Taller o Seminario:')!!}</th>
-		<td>{!! Form::select('curso', ['Curso'=>'Curso', 'Conferencias'=>'Conferencias', 'Taller'=>'Taller', 'Seminario'=>'Seminario'], null, ['class' => 'form-control border-secondary rounded-pill']) !!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('desc', 'Descripción:')!!}</th>
-		<td>{!!Form::textarea('desc', null, array('size' => '50x4', 'class'=>'form-control border-secondary rounded'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('instituto', 'Instituto:')!!}</th>
-		<td>{!!Form::text('instituto', null, array('class'=>'form-control border-secondary rounded-pill'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('duración', 'Duración:')!!}</th>
-		<td>{!!Form::text('duración', null, array('class'=>'form-control border-secondary rounded-pill'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('doc_ex', 'Documento Obtenido:')!!}</th>
-		<td>{!!Form::text('doc_ex', null, array('class'=>'form-control border-secondary rounded-pill'))!!}</td>
-	</tr>
-	<tr>
-		<th>Imagen de Documento Obtenido:</th>
-		<td>{!!Form::file('ruta_docex', array('class'=>'form-control border-secondary rounded-pill'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal', 'Mostrar en PDF:')!!}</th>
-		<td>{!!Form::checkbox('principal', 'yes', true)!!}</td>
-	</tr>
-	<tr>
-		<th>Imagen de Actual del Documento:</th>
-		<td><img class="id_img" src="{{asset("storage/$name_user/docs/$feae->ruta_docex")}}"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>{!! Form::submit('Guardar', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;')) !!}</td>
-	</tr>
-	{!!Form::close()!!}
-</table>
- 
-@endsection
---}}

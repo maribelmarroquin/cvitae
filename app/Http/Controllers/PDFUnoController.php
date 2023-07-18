@@ -113,7 +113,7 @@ class PDFUnoController extends Controller
         }
      
 
-        \App\ConsultaCV::create([
+        \App\Models\ConsultaCV::create([
             'fk_user_consulta' => $id_user,
             'user_cons' => $userConsulta,
             'empresa' => $request['empresa'],

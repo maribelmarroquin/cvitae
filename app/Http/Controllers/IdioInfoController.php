@@ -31,7 +31,7 @@ class IdioInfoController extends Controller
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
 
-        \App\IdioInfo::create([
+        \App\Models\IdioInfo::create([
             'idi_info' => $request['idi_info'],
             'nivel' => $request['nivel'].'%',
             'clasificacion' => $request['clasificacion'],
@@ -56,7 +56,7 @@ class IdioInfoController extends Controller
         $tabName = 'idi_in';
         $principal = $request['principal'];
         
-        $act_idioInfo = \App\IdioInfo::find($id);
+        $act_idioInfo = \App\Models\IdioInfo::find($id);
         $act_idioInfo->idi_info = $request->idi_info;
         $act_idioInfo->nivel = $request->nivel.'%';
         $act_idioInfo->clasificacion = $request->clasificacion;
@@ -77,7 +77,7 @@ class IdioInfoController extends Controller
     public function destroy($id)
     {
         $tabName = 'idi_in';
-        \App\IdioInfo::destroy($id);
+        \App\Models\IdioInfo::destroy($id);
         Session::flash('message-error', 'Conocimientos Informáticos e Idiomas eliminados.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }
@@ -86,7 +86,7 @@ class IdioInfoController extends Controller
         $tabName = 'idi_in';
         $id = Auth::user('users')->id;
 
-        \App\ClasConocimientos::create([
+        \App\Models\ClasConocimientos::create([
             'clasificacion' => $request['clasificacion'],
             'fk_user_clas_conocimientos'=>$id,
             ]);
@@ -98,7 +98,7 @@ class IdioInfoController extends Controller
     public function destroyClas($id)
     {
         $tabName = 'idi_in';
-        \App\ClasConocimientos::destroy($id);
+        \App\Models\ClasConocimientos::destroy($id);
         Session::flash('message-error', 'Clasificación de conocimientos eliminada correctamente.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

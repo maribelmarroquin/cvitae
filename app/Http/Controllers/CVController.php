@@ -124,11 +124,11 @@ class CVController extends Controller
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
 
-        \App\Resumen::create([
+        \App\Models\Resumen::create([
             'titulo' => $request['titulo'],
             'resumen' => $request['resumen'],
-            'principal' => ($request['principal'] === 'yes') ? "'OK'":"-",
-            'principal_vista' => ($request['principal_vista'] === 'yes') ? "'OK'":"-",
+            'principal' => ($request['principal'] === 'yes') ? "OK":"-",
+            'principal_vista' => ($request['principal_vista'] === 'yes') ? "OK":"-",
             'fk_user_re'=>$id,
             ]);
 
@@ -151,7 +151,7 @@ class CVController extends Controller
         
         $principal = $request['principal'];
 
-            $act_resumen = \App\Resumen::find($id_resumen);
+            $act_resumen = \App\Models\Resumen::find($id_resumen);
             $act_resumen->titulo = $request->titulo;
             $act_resumen->resumen = $request->resumen;
             $act_resumen->principal = ($request['principal'] === 'yes') ? "OK":"-";
@@ -166,7 +166,7 @@ class CVController extends Controller
     public function destroy($id)
     {
         $tabName = 'resumen';
-        \App\Resumen::destroy($id);
+        \App\Models\Resumen::destroy($id);
         Session::flash('message-error', 'Resumen profesional eliminado correctamente.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

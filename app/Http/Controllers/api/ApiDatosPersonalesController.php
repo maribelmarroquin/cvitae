@@ -12,7 +12,7 @@ class ApiDatosPersonalesController extends Controller
     public function register(DatosPerRequest $request)
     {
     	$user = auth()->user();
-    	$datos_personales = \App\DatosPer::where('fk_user_dp', '=', $user['id'])->first();
+    	$datos_personales = \App\Models\DatosPer::where('fk_user_dp', '=', $user['id'])->first();
 
     	if(!is_null($datos_personales)){
     		return response()->json([
@@ -21,7 +21,7 @@ class ApiDatosPersonalesController extends Controller
 	        ], 401);
     	}
 
-        \App\DatosPer::create([
+        \App\Models\DatosPer::create([
             'ruta' => $request['ruta'],
             'nombre' => $request['nombre'],
             'profesion' => $request['profesion'],
@@ -46,7 +46,7 @@ class ApiDatosPersonalesController extends Controller
 
     	$user = auth()->user();
 
-    	$datos_personales = \App\DatosPer::where('fk_user_dp', '=', $user['id'])->first();
+    	$datos_personales = \App\Models\DatosPer::where('fk_user_dp', '=', $user['id'])->first();
 
     	if(is_null($datos_personales)){
     		return response()->json([
@@ -80,7 +80,7 @@ class ApiDatosPersonalesController extends Controller
     	$id_datos_per = $request['id_datos_per'];
 
 		
-		$act_datPer = \App\DatosPer::where('id_datos_per', $id_datos_per)->where('fk_user_dp', $user['id'])->first();
+		$act_datPer = \App\Models\DatosPer::where('id_datos_per', $id_datos_per)->where('fk_user_dp', $user['id'])->first();
 
 		if(is_null($act_datPer)){
       		return response()->json([

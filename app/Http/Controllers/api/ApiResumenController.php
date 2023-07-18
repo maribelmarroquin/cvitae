@@ -19,7 +19,7 @@ class ApiResumenController extends Controller
 
         $user = auth()->user();
 
-        \App\Resumen::create([
+        \App\Models\Resumen::create([
             'titulo' => $request['titulo'],
             'resumen' => $request['resumen'],
             'principal' => ($request['principal'] === 'yes') ? "OK":"-",
@@ -45,7 +45,7 @@ class ApiResumenController extends Controller
 
     	$user = auth()->user();
 
-    	$resumen = \App\Resumen::titulo($request['titulo'])
+    	$resumen = \App\Models\Resumen::titulo($request['titulo'])
     					->resumen($request['resumen'])
     					->principal($request['principal'])
     					->principalVista($request['principal_vista'])
@@ -86,7 +86,7 @@ class ApiResumenController extends Controller
     	$id_resumen = $request['id_resumen'];
 
 		
-		$act_resumen = \App\Resumen::where('id_resumen', $id_resumen)->where('fk_user_re', $user['id'])->first();
+		$act_resumen = \App\Models\Resumen::where('id_resumen', $id_resumen)->where('fk_user_re', $user['id'])->first();
 
 		if(is_null($act_resumen)){
       		return response()->json([
@@ -128,7 +128,7 @@ class ApiResumenController extends Controller
 	        ], 401);
       	}
       	$user = auth()->user();
-      	$destroyer = \App\Resumen::where('id_resumen', '=',$request['id_resumen'])->where('fk_user_re', '=', $user['id'] )->delete();
+      	$destroyer = \App\Models\Resumen::where('id_resumen', '=',$request['id_resumen'])->where('fk_user_re', '=', $user['id'] )->delete();
 
       	if(!$destroyer){
       		return response()->json([

@@ -36,7 +36,7 @@ class DatosPerRequest extends FormRequest
             'direccion' => 'required|max:100',
             'telefono' => 'required|max:13',
             'email_u' => 'required|email|max:50',
-            'sitio' => 'max:100|url'
+            'sitio' => 'nullable|max:100|url'
         ];
     }
 

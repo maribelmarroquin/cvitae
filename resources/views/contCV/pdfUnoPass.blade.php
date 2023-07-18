@@ -21,7 +21,9 @@
 	</header>
 
 	@if($dp->ruta ==! "")
-	<img src="storage/{{$name_user}}/id/{{$dp->ruta}}" class="img_id" />
+	<div class="imagen_id">
+		<img src="storage/{{$name_user}}/id/{{$dp->ruta}}" class="img_id" />
+	</div>
 	{{--<img class="img_id" src="id/{{ $dp->ruta }}">--}}
 	@else
 	<h5 class="sin_foto">Ingrese una fotografía en el sistema.</h5>
@@ -88,12 +90,16 @@
 	@foreach ($expProf as $ep)
 	<div class="experiencia">
 		<div class="ep">
-			
 			<div class="duracion"><span class="icon_empleo"></span>{{ strftime("%B de %Y", strtotime($ep->inicio_lab)) }} a {{ strftime("%B de %Y", strtotime($ep->fin_lab)) }}</div>
 			<div class="empresa"><span class="auxiliar">Puesto de </span><strong>{{ $ep->cargo }}</strong> <span class="auxiliar">en </span><br><i>{{ $ep->empresa }}</i></div>
 		</div>
 		<div class="funciones">
-			<span class="fun"><span class="label_funciones">Funciones: </span>{{ $ep->funciones }}</span><br>
+			<div class="funciones_des">
+				<span class="fun">
+					<span class="label_funciones">Funciones: </span><p>{{ $ep->funciones }}</p>
+				</span>
+			</div>
+			<br>
 			@if ($ep->herramientas != null || $ep->herramientas!= '' || !empty($ep->herramientas))
 				<div class="herramientas"><span class="label_funciones">Herramientas utilizadas: </span>{{ $ep->herramientas }}</div>
 			@endif
@@ -187,6 +193,7 @@
 		Para consultar <b>más detalles sobre mi historia profesional,</b> puedes ingresar al siguiente enlace y utilizar las credenciales de acceso que se muestran a continuación:
 		<div class="mas_info">
 			<a href="https://cvitae.solinfori.com/loginConsulta">cvitae.solinfori.com/loginConsulta</a><br>
+			<br>
 			Usuario: <b>{{ $userConsulta }}</b><br>
 			Password: <b>{{ $passConsulta }}</b>
 		</div>

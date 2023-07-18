@@ -37,7 +37,7 @@ class FormExAcaController extends Controller
 
         if ($request['curso']==='Curso' || $request['curso']==='Conferencias' || $request['curso']==='Taller' || $request['curso']==='Seminario') {
             
-            \App\FormExAca::create([
+            \App\Models\FormExAca::create([
             'curso' => $request['curso'],
             'desc' => $request['desc'],
             'instituto' => $request['instituto'],
@@ -103,7 +103,7 @@ class FormExAcaController extends Controller
 
         if ($request['curso']==='Curso' || $request['curso']==='Conferencias' || $request['curso']==='Taller' || $request['curso']==='Seminario') {
 
-            $act_formExAca = \App\FormExAca::find($id);
+            $act_formExAca = \App\Models\FormExAca::find($id);
             $act_formExAca->curso = $request->curso;
             $act_formExAca->desc = $request->desc;
             $act_formExAca->instituto = $request->instituto;
@@ -132,7 +132,7 @@ class FormExAcaController extends Controller
     public function destroy($id)
     {
         $tabName = 'form_exaca';
-        \App\FormExAca::destroy($id);
+        \App\Models\FormExAca::destroy($id);
         Session::flash('message-error', 'Datos Extra Académicos eliminados.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

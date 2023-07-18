@@ -27,7 +27,7 @@ class UsersController extends Controller
 	        ], 401);
       	}
 
-      	$user = \App\User::where('email', $request->email)->first();
+      	$user = \App\Models\User::where('email', $request->email)->first();
 	      
       	if (!is_null($user) && Hash::check($request->password, $user->password) && $user->confirmed == 1) {
         
@@ -85,7 +85,7 @@ class UsersController extends Controller
 
         $request['confirmation_code'] = Str::random(25);
 
-        $user = \App\User::create([
+        $user = \App\Models\User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
@@ -139,28 +139,28 @@ class UsersController extends Controller
             $id_u = $id->id;
         }
 
-        \App\UserDesignsPDF::create([
+        \App\Models\UserDesignsPDF::create([
             'fk_design_pdf' => '1',
             'fk_user_pdf' => $id_u,
             'vigencia_ini_pdf' => \Carbon\Carbon::now(),
             'vigencia_fin_pdf' => \Carbon\Carbon::now()->addYears(10),
         ]);
 
-        \App\UserDesignsPDF::create([
+        \App\Models\UserDesignsPDF::create([
             'fk_design_pdf' => '2',
             'fk_user_pdf' => $id_u,
             'vigencia_ini_pdf' => \Carbon\Carbon::now(),
             'vigencia_fin_pdf' => \Carbon\Carbon::now()->addYears(10),
         ]);
 
-        \App\UserDesignsView::create([
+        \App\Models\UserDesignsView::create([
             'design_view' => '1',
             'fk_user_design_view' => $id_u, 
             'vigencia_ini_view' => \Carbon\Carbon::now(),
             'vigencia_fin_view' => \Carbon\Carbon::now()->addYears(10),
         ]);
 
-        \App\UserDesignsView::create([
+        \App\Models\UserDesignsView::create([
             'design_view' => '2',
             'fk_user_design_view' => $id_u,
             'vigencia_ini_view' => \Carbon\Carbon::now(),
@@ -170,7 +170,7 @@ class UsersController extends Controller
         /**
          * Diseño de vista que permanece.
          */
-        \App\DesignViewStay::create([
+        \App\Models\DesignViewStay::create([
             'view_stay' => 'EleganceView',
             'fk_user_view' => $id_u,
         ]);

@@ -28,7 +28,7 @@ class ObjProfController extends Controller
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
 
-        \App\ObjProf::create([
+        \App\Models\ObjProf::create([
             'objetivo' => $request['objetivo'],
             'des_obj' => $request['des_obj'],
             'principal' => ($principal === 'yes') ? "OK":"-",
@@ -52,7 +52,7 @@ class ObjProfController extends Controller
     {
         $tabName = 'obj_prof';
 
-        $act_objProf = \App\ObjProf::find($id);
+        $act_objProf = \App\Models\ObjProf::find($id);
         $act_objProf->objetivo = $request->objetivo;
         $act_objProf->des_obj = $request->des_obj;
         $act_objProf->principal = ($request['principal'] === 'yes') ? "OK":"-";
@@ -72,7 +72,7 @@ class ObjProfController extends Controller
     public function destroy($id)
     {
         $tabName = 'obj_prof';
-        \App\ObjProf::destroy($id);
+        \App\Models\ObjProf::destroy($id);
         Session::flash('message-error', 'Objetivo Profesional eliminado.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

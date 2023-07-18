@@ -15,6 +15,7 @@
 </li>
 			</ul>
 		</div>
+		
 <div class="marco_resumen">
 	<div class="mc">
 		<div class="imagen_per">

@@ -17,7 +17,9 @@
 	<title> Curriculum Vitae - @yield('titulo') </title>
 
 </head>
+
 <body>
+
 	<div id="up"></div>
 	<span id="carga" class="carga">
 		<img src="{{ asset('img/cv.png') }}">
@@ -27,7 +29,7 @@
 	@include('messages.message-correct')
 	@include('messages.message-error')
 
-		@yield('contenido')
+@yield('contenido')
 
 	<script type="text/javascript" src="{{$design_js}}"></script>
 	{{--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> --}}

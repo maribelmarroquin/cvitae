@@ -96,7 +96,7 @@ $(window).scroll(function(){
  * 
  *    Evento para efectos de scroll de Conocimientos.
  * 
- */
+
 $(window).scroll(function(){
   var posicion = $("#comp_ing").get(0).getBoundingClientRect().top;
   var pantalla = $(window).innerHeight() / 3;
@@ -107,12 +107,24 @@ $(window).scroll(function(){
       $('.fila').css('animation', '');
     }
 });
+*/
+$(window).scroll(function(){
+  var posicion = $("#comp_ing").get(0).getBoundingClientRect().top;
+  var pantalla = $(window).innerHeight() / 3;
+    if(posicion < pantalla){
+      $(".metrica_total").css("animation", "metrica_total_mover 2s ease-out");
+    }
+    else{
+      $(".metrica_total").css("animation", "");
+    }
+});
+
 
 /**
  * 
  *    Evento para efectos de hover de barra de Conocimientos.
  * 
- */
+
 $(document).ready(function(){
 	$(".metrica").hover(function(){
     $(".metrica_total").css("animation", "metrica_total_mover 2s ease-out");
@@ -120,3 +132,4 @@ $(document).ready(function(){
     $(".metrica_total").css("animation", "");
   });
 });
+ */

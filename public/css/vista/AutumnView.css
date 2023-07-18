@@ -1,16 +1,42 @@
 /**/
+/*		Design: AutumnView					*/
 /*		Colores Utilizados en el diseño:	*/
 /*		#2988BC								*/
 /*		#2F496E								*/
 /*		#F4EADE								*/
 /*		#ED8C72								*/
 /**/
+#ir-arriba {
+	display: none;
+}
+
+/*.ir-arriba {
+	width: 50px;
+	height: 50px;
+	padding:5px;
+    background:#2a2a2a;
+    filter: invert(100%);
+	font-size:50px;
+	color:#fff;
+	cursor:pointer;
+	position: sticky;
+	bottom:80px;
+    right:10px;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #cccccc;
+}*/
+
 /* ----------------------------CONTENIDO------------------------------ */
 /**/
 /**/
 /**/
 /* ---------------- Título ----------------- */
 /**/
+
+.header{
+	display: none;
+}
 #carga{
 	display: none;
 }
@@ -478,6 +504,23 @@ max-height: 290px;
 	border: none;
 	padding: 5px;
 }
+
+/*-------------------------------UP-------------------------*/
+
+
+
+@media screen and (max-width: 510px) {
+    .ir-arriba {
+        bottom:110px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+	.ir-arriba {
+        bottom:10px;
+    }
+}
+
 /* ------------------ Footer ---------------- */
 .footer{
   position: fixed;

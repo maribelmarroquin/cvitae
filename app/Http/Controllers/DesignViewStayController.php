@@ -28,7 +28,7 @@ class DesignViewStayController extends Controller
         $tabName = "exportar";
         $id = Auth::user('users')->id;
 
-         \App\DesignViewStay::create([
+         \App\Models\DesignViewStay::create([
             'view_stay' => $request['customSwitch'],
             'fk_user_view'=> $id
             ]);
@@ -45,7 +45,7 @@ class DesignViewStayController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        $act_dvs = \App\DesignViewStay::find($id);
+        $act_dvs = \App\Models\DesignViewStay::find($id);
         $act_dvs->view_stay = $request->customSwitch;
         $act_dvs->save();
 

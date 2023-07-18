@@ -28,7 +28,7 @@ class OtrosController extends Controller
         $id = Auth::user('users')->id;
         $principal = $request['principal'];
 
-        \App\Otros::create([
+        \App\Models\Otros::create([
             'dato' => $request['dato'],
             'des_dato' => $request['des_dato'],
             'ruta_dato' => $request['ruta_dato'],
@@ -85,7 +85,7 @@ class OtrosController extends Controller
         $tabName = 'otr_dat';
         $principal = $request['principal'];
 
-        $act_otros = \App\Otros::find($id);
+        $act_otros = \App\Models\Otros::find($id);
             $act_otros->dato = $request->dato;
             $act_otros->des_dato = $request->des_dato;
             $act_otros->ruta_dato = $request->ruta_dato;
@@ -106,7 +106,7 @@ class OtrosController extends Controller
     public function destroy($id)
     {
         $tabName = 'otr_dat';
-        \App\Otros::destroy($id);
+        \App\Models\Otros::destroy($id);
         Session::flash('message-error', 'Dato eliminado correctamente.');
         return redirect::to('principal')->withInput(['tab'=> $tabName]);
     }

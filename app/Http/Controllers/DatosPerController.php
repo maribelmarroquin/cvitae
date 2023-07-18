@@ -34,7 +34,7 @@ class DatosPerController extends Controller
         $tabName = "dat_pers";
         $id = Auth::user('users')->id;
 
-         \App\DatosPer::create([
+         \App\Models\DatosPer::create([
             'ruta' => $request['ruta'],
             'nombre' => $request['nombre'],
             'profesion' => $request['profesion'],
@@ -88,7 +88,7 @@ class DatosPerController extends Controller
          
         $this->validate($request, $rules, $messages);
         */
-        $act_datPer = \App\DatosPer::find($id);
+        $act_datPer = \App\Models\DatosPer::find($id);
         $act_datPer->ruta = $request->ruta;
         $act_datPer->nombre = $request->nombre;
         $act_datPer->profesion = $request->profesion;

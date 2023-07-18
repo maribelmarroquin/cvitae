@@ -38,3 +38,22 @@ function showContent(check) {
         element.style.display='none';
     }
 }
+
+function seleccionarGrupo(nombreGrupo) {
+    // Obtener todos los checkboxes del grupo
+    var checkboxes = document.getElementsByName(nombreGrupo);
+
+    // Obtener el valor del checkbox que se acaba de seleccionar/deseleccionar
+    var valorCheckbox = event.target.checked;
+
+    // Recorrer todos los checkboxes del grupo y actualizar su estado
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = valorCheckbox;
+    }
+}
+
+function eliminarSeleccionado(nombreForm) {
+    let formulario = document.getElementById(nombreForm);
+    console.log(formulario);
+    formulario.submit();
+}

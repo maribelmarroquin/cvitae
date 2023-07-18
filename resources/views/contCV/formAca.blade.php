@@ -1,73 +1,77 @@
 <h1>Formación Académica.</h1>
 
-@if(count($errors) > 0)
+@if($errors->any())
 	<div class="errors alert alert-danger alert-dismissible" role="alert">
 		<h5>Valide lo siguiente:</h5>
 		<ul>
-		@foreach($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
+			@foreach($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
 		</ul>
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
-		  </button>
+		</button>
 	</div>
 @endif
  
 <table>
-	{!!Form::open(array(
-		'method'=>'POST',
-		'route'=>'formAca.store',
-		'files'=>true))!!}
+	<form method="POST" action="{{ route('formAca.store') }}" enctype="multipart/form-data">
+		@csrf
 	
-	<tr>
-		<th>{!!Form::label('nivel', '*Nivel académico:')!!}</th>
-		<td>{!!Form::text('nivel', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('especialidad', 'Especialidad:')!!}</th>
-		<td>{!!Form::text('especialidad', null, array('class'=>'form-control border-secondary rounded-pill', 'maxlength'=>'50'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('instituto', '*Instituto:')!!}</th>
-		<td>{!!Form::text('instituto', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('ano_ini', '*Año de iniciación:')!!}</th>
-		<td>{!!Form::month('ano_ini', "{{ \Carbon\Carbon::createFromDate()->format('Y-m')}}", array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('ano_fin', '*Año de finalización:')!!}</th>
-		<td>
-			<br>
-			{!! Form::select('status', ['cursando' => 'Cursando Actualmente.', 'fin' => 'Insertar año de finalización.'], null, ['class' => 'form-control border-secondary rounded-pill', 'onchange'=>'carg(this);']) !!}
-			{!!Form::month('ano_fin', "{{ \Carbon\Carbon::createFromDate()->format('Y-m')}}", array('class'=>'form-control border-secondary rounded-pill', 'id' => 'ano_fin1', 'required', 'disabled', 'maxlength'=>'50'))!!}  
-			<br>
-		</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('doc', '*Documento obtenido:')!!}</th>
-		<td>{!!Form::text('doc', null, array('class'=>'form-control border-secondary rounded-pill', 'required', 'maxlength'=>'50'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('ruta_doc', 'Imagen de Documento Obtenido:')!!}</th>
-		<td>{!!Form::file('ruta_doc', array('class'=>'form-control border-secondary rounded-pill', 'maxlength'=>'255'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal', '¿Mostrar en PDF?')!!}</th>
-		<td>{!!Form::checkbox('principal', 'yes', true, array('class'=>'form-control border-secondary rounded', 'maxlength'=>'3'))!!}</td>
-	</tr>
-	<tr>
-		<th>{!!Form::label('principal_vista', '¿Mostrar en consulta web?')!!}</th>
-		<td>{!!Form::checkbox('principal_vista', 'yes', true, array('class'=>'form-control border-secondary rounded', 'maxlength'=>'3'))!!}</td>
-	</tr>
-	<tr>
-		<td>* Campos Obligatorios</td>
-		<td>{!! Form::submit('Guardar', array('class'=> 'btn', 'style' => 'background:#006699; color:#ffffff;')) !!} {!! Form::reset('Limpiar', array('class'=> 'btn btn-secondary')) !!}</td>
-	</tr>
-	{!!Form::close()!!}
+		<tr>
+			<th><label for="nivel">*Nivel académico:</label></th>
+			<td><input type="text" name="nivel" id="nivel" class="form-control border-secondary rounded-pill" required maxlength="50"></td>
+		</tr>
+		<tr>
+			<th><label for="especialidad">Especialidad:</label></th>
+			<td><input type="text" name="especialidad" id="especialidad" class="form-control border-secondary rounded-pill" maxlength="50"></td>
+		</tr>
+		<tr>
+			<th><label for="instituto">*Instituto:</label></th>
+			<td><input type="text" name="instituto" id="instituto" class="form-control border-secondary rounded-pill" required maxlength="50"></td>
+		</tr>
+		<tr>
+			<th><label for="ano_ini">*Año de iniciación:</label></th>
+			<td><input type="month" name="ano_ini" id="ano_ini" class="form-control border-secondary rounded-pill" required></td>
+		</tr>
+		<tr>
+			<th><label for="ano_fin">*Año de finalización:</label></th>
+			<td>
+				<br>
+				<select name="status" id="status" class="form-control border-secondary rounded-pill" onchange="carg(this);">
+					<option value="cursando">Cursando Actualmente.</option>
+					<option value="fin">Insertar año de finalización.</option>
+				</select>
+				<input type="month" name="ano_fin" id="ano_fin" class="form-control border-secondary rounded-pill" disabled>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="doc">*Documento obtenido:</label></th>
+			<td><input type="text" name="doc" id="doc" class="form-control border-secondary rounded-pill" required maxlength="50"></td>
+		</tr>
+		<tr>
+			<th><label for="ruta_doc">Imagen de Documento Obtenido:</label></th>
+			<td><input type="file" name="ruta_doc" id="ruta_doc" class="form-control border-secondary rounded-pill"></td>
+		</tr>
+		<tr>
+			<th><label for="principal">¿Mostrar en PDF?</label></th>
+			<td><input type="checkbox" name="principal" id="principal" value="yes" checked class="form-control border-secondary rounded" maxlength="3"></td>
+		</tr>
+		<tr>
+			<th><label for="principal_vista">¿Mostrar en consulta web?</label></th>
+			<td><input type="checkbox" name="principal_vista" id="principal_vista" value="yes" checked class="form-control border-secondary rounded" maxlength="3"></td>
+		</tr>
+		<tr>
+			<td>* Campos Obligatorios</td>
+			<td>
+				<button type="submit" class="btn" style="background:#006699; color:#ffffff;">Guardar</button>
+				<button type="reset" class="btn btn-secondary">Limpiar</button>
+			</td>
+		</tr>
+	</form>
 </table>
 <br><br>
-@if(count($formAca) ==! 0)
+@if(count($formAca) !== 0)
 	@include('contCV.list_formAca')
 @endif
